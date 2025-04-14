@@ -2,6 +2,8 @@
 <html lang="es">
     <head>
         <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/aframe-joystick-controls@4.0.3/dist/aframe-joystick-controls.min.js"></script>
+
         <title>Aula Escolar con Silla</title>
     </head>
     <body>
@@ -327,36 +329,9 @@
             </a-entity>
 
             <!-- Cámara -->
-            <a-entity id="cameraRig" joystick-movement>
-                <a-camera wasd-controls-enabled="false" position="0 1.6 0"></a-camera>
+            <a-entity id="rig" joystick-controls="hand: right">
+                <a-entity camera look-controls position="0 1.6 0"></a-entity>
             </a-entity>
         </a-scene>
-
-        <script src="https://unpkg.com/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
-        <script>
-            AFRAME.registerComponent("joystick-movement", {
-                tick: function () {
-                    const gamepads = navigator.getGamepads();
-                    if (!gamepads) return;
-                    const gp = gamepads[0];
-                    if (!gp) return;
-
-                    const x = gp.axes[2]; // joystick horizontal
-                    const y = gp.axes[3]; // joystick vertical
-
-                    if (Math.abs(x) > 0.1 || Math.abs(y) > 0.1) {
-                        const camera = document.querySelector("#cameraRig");
-                        const direction = new THREE.Vector3();
-
-                        camera.object3D.getWorldDirection(direction);
-                        direction.y = 0;
-                        direction.normalize();
-
-                        camera.object3D.position.x += direction.x * -y * 0.05;
-                        camera.object3D.position.z += direction.z * -y * 0.05;
-                    }
-                }
-            });
-        </script>
     </body>
 </html>
