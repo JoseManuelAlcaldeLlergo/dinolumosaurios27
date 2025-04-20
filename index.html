@@ -90,7 +90,10 @@
                 rotation="0 180 0"></a-entity>
 
             <!-- CÃMARA -->
-            <a-entity camera position="0 1.6 0"></a-entity>
+            <a-entity id="cameraRig" movement-controls="fly: false; speed: 0.2">
+  <a-entity camera wasd-controls="acceleration: 20" position="0 1.6 0" look-controls></a-entity>
+</a-entity>
+
         </a-scene>
     </body>
 </html>
