@@ -47,31 +47,30 @@
   <body>
     <a-scene vr-mode-ui="enabled: true" xrweb="ar: true" environment="preset: forest; ground: flat">
 
-      <!-- Suelo invisible para teleportación -->
-      <a-plane class="floor" position="0 0 0" rotation="-90 0 0" width="50" height="50" color="#fff" visible="false"></a-plane>
+      <!-- Suelo visible para facilitar el teletransporte -->
+      <a-plane class="floor" position="0 0 0" rotation="-90 0 0" width="50" height="50" color="#7BC8A4" visible="true"></a-plane>
 
       <!-- Cámara dentro de rig movible -->
       <a-entity id="cameraRig" position="0 0 0">
         <a-entity camera position="0 1.6 0" look-controls wasd-controls="enabled: false"></a-entity>
       </a-entity>
 
-      <!-- Control de teletransporte -->
-      <a-entity teleport-controls="cameraRig: #cameraRig; button: trigger" raycaster="objects: .floor" line="color: red"></a-entity>
-
-      <!-- Controladores Meta Quest -->
+      <!-- Controladores con teletransporte y selección de sillas -->
       <a-entity
         id="left-controller"
         meta-touch-controls="hand: left"
-        raycaster="objects: .selectable; showLine: true"
-        line="color: cyan; opacity: 0.6"
+        teleport-controls="cameraRig: #cameraRig; button: trigger"
+        raycaster="objects: .floor"
+        line="color: red; opacity: 0.8"
         chair-selector>
       </a-entity>
 
       <a-entity
         id="right-controller"
         meta-touch-controls="hand: right"
-        raycaster="objects: .selectable; showLine: true"
-        line="color: cyan; opacity: 0.6"
+        teleport-controls="cameraRig: #cameraRig; button: trigger"
+        raycaster="objects: .floor"
+        line="color: red; opacity: 0.8"
         chair-selector>
       </a-entity>
 
