@@ -1,54 +1,96 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Prueba Movimiento VR</title>
-    <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aframe-joystick-controls@4.0.3/dist/aframe-joystick-controls.min.js"></script>
-  </head>
-  <body>
-    <a-scene>
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>SelecciÃ³n de Sillas AR - Meta Touch Controls</title>
+        <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+        <script src="./aframe-extras.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.5.0/dist/aframe-environment-component.min.js"></script>
+        <!-- COMPONENTE DE ANIMACIÃ“N AL CLIC -->
+        <script>
+            AFRAME.registerComponent("chair-selector", {
+                init: function () {
+                    const controllerEl = this.el;
 
-      <!-- Cámara y rig con joystick -->
-      <a-entity id="rig" joystick-controls="hand: left; speed: 0.1">
-        <a-entity camera look-controls position="0 1.6 0"></a-entity>
-      </a-entity>
+                    controllerEl.addEventListener("triggerdown", function () {
+                        const intersections = controllerEl.components.raycaster.intersections;
 
-      <!-- Suelo -->
-      <a-plane color="#e0e0e0" height="100" width="100" rotation="-90 0 0"></a-plane>
+                        if (intersections.length > 0) {
+                            const chair = intersections[0].object.el;
 
-      <!-- Cubo grande al fondo para referencia -->
-      <a-box position="0 1 -10" depth="1" height="2" width="2" color="#4CC3D9"></a-box>
-      <a-box position="2 1 -20" depth="1" height="2" width="2" color="#F55555"></a-box>
-      <a-box position="-2 1 -30" depth="1" height="2" width="2" color="#7BC8A4"></a-box>
+                            // AnimaciÃ³n de rebote
+                            chair.setAttribute("animation__bounce", {
+                                property: "position",
+                                to: {
+                                    x: chair.object3D.position.x,
+                                    y: chair.object3D.position.y + 0.3,
+                                    z: chair.object3D.position.z
+                                },
+                                dur: 200,
+                                dir: "alternate",
+                                loop: 1,
+                                easing: "easeOutQuad"
+                            });
 
-      <!-- Luz -->
-      <a-entity light="type: directional; intensity: 0.8" position="1 3 1"></a-entity>
+                            // Eliminar animaciÃ³n despuÃ©s de ejecutarse
+                            setTimeout(() => {
+                                chair.removeAttribute("animation__bounce");
+                            }, 400);
+                        }
+                    });
+                }
+            });
+        </script>
+    </head>
 
-      <a-entity debug-joystick>
-  <a-text id="debugText" value="Esperando..." position="0 2 -2" color="black"></a-text>
-</a-entity>
+    <body>
+        <a-scene vr-mode-ui="enabled: true" xrweb="ar: true" environment="preset: forest; ground: flat">
+            <!-- CONTROLADORES DE META QUEST -->
+            <a-entity
+                id="left-controller"
+                meta-touch-controls="hand: left"
+                raycaster="objects: .selectable; showLine: true"
+                line="color: cyan; opacity: 0.6"
+                chair-selector></a-entity>
 
+            <a-entity
+                id="right-controller"
+                meta-touch-controls="hand: right"
+                raycaster="objects: .selectable; showLine: true"
+                line="color: cyan; opacity: 0.6"
+                chair-selector></a-entity>
 
-    </a-scene>
-    <script>
-  AFRAME.registerComponent("debug-joystick", {
-    tick: function () {
-      const gamepads = navigator.getGamepads();
-      const gp = gamepads[0]; // También puedes probar con [1]
-      if (!gp) return;
+            <!-- MODELOS -->
+            <a-assets>
+                <a-asset-item
+                    id="chair-obj"
+                    src="https://cdn.glitch.global/3b65f8d1-3745-4397-a203-11a3cea57b05/silla.obj?v=1743503312032"></a-asset-item>
+                <a-asset-item
+                    id="chair-mtl"
+                    src="https://cdn.glitch.global/3b65f8d1-3745-4397-a203-11a3cea57b05/Office_chairs.mtl?v=1743493773701"></a-asset-item>
+            </a-assets>
 
-      const x = gp.axes[2];
-      const y = gp.axes[3];
+            <!-- SILLAS SELECCIONABLES -->
+            <a-entity
+                class="selectable"
+                obj-model="obj: #chair-obj; mtl: #chair-mtl"
+                position="-2 0 -2"
+                rotation="0 180 0"></a-entity>
 
-      const text = `Joystick: X=${x.toFixed(2)} Y=${y.toFixed(2)}`;
-      const display = document.querySelector("#debugText");
-      if (display) {
-        display.setAttribute("value", text);
-      }
-    }
-  });
-</script>
+            <a-entity
+                class="selectable"
+                obj-model="obj: #chair-obj; mtl: #chair-mtl"
+                position="0 0 -2"
+                rotation="0 180 0"></a-entity>
 
-  </body>
+            <a-entity
+                class="selectable"
+                obj-model="obj: #chair-obj; mtl: #chair-mtl"
+                position="2 0 -2"
+                rotation="0 180 0"></a-entity>
+
+            <!-- CÃMARA -->
+            <a-entity camera position="0 1.6 0"></a-entity>
+        </a-scene>
+    </body>
 </html>
