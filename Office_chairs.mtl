@@ -1,0 +1,44 @@
+# Blender MTL File: 'Office chairs.blend'
+# Material Count: 3
+
+newmtl Office_chair_ver01
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump Office chair_ver01_Normal.png
+map_Kd Office chair_ver01_BaseColor.png
+map_Ns Office chair_ver01_Roughness.png
+refl Office chair_ver01_Metallic.png
+
+newmtl Office_chair_ver02
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump Office chair_ver02_Normal.png
+map_Kd Office chair_ver02_BaseColor.png
+map_Ns Office chair_ver02_Roughness.png
+refl Office chair_ver02_Metallic.png
+
+newmtl Office_chair_ver03
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump Office chair_ver03_Normal.png
+map_Kd Office chair_ver03_BaseColor.png
+map_Ns Office chair_ver03_Roughness.png
+refl Office chair_ver03_Metallic.png
