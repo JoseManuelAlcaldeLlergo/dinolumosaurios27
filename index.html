@@ -1,104 +1,97 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Selección de Sillas AR - Aírame</title>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>SelecciÃ³n de Sillas AR - Meta Touch Controls</title>
+        <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+        <script src="./aframe-extras.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.5.0/dist/aframe-environment-component.min.js"></script>
+        <!-- COMPONENTE DE ANIMACIÃ“N AL CLIC -->
+        <script>
+            AFRAME.registerComponent("chair-selector", {
+                init: function () {
+                    const controllerEl = this.el;
 
-    <!-- A-Frame Core -->
-    <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+                    controllerEl.addEventListener("triggerdown", function () {
+                        const intersections = controllerEl.components.raycaster.intersections;
 
-    <!-- aframe-extras desde CDN (incluye teleport-controls) -->
-    <script src="https://unpkg.com/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
+                        if (intersections.length > 0) {
+                            const chair = intersections[0].object.el;
 
-    <!-- Entorno visual -->
-    <script src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.5.0/dist/aframe-environment-component.min.js"></script>
+                            // AnimaciÃ³n de rebote
+                            chair.setAttribute("animation__bounce", {
+                                property: "position",
+                                to: {
+                                    x: chair.object3D.position.x,
+                                    y: chair.object3D.position.y + 0.3,
+                                    z: chair.object3D.position.z
+                                },
+                                dur: 200,
+                                dir: "alternate",
+                                loop: 1,
+                                easing: "easeOutQuad"
+                            });
 
-    <!-- Componente personalizado para selección de sillas -->
-    <script>
-      AFRAME.registerComponent("chair-selector", {
-        init: function () {
-          const controllerEl = this.el;
-          controllerEl.addEventListener("triggerdown", function () {
-            const intersections = controllerEl.components.raycaster.intersections;
-            if (intersections.length > 0) {
-              const chair = intersections[0].object.el;
-              chair.setAttribute("animation__bounce", {
-                property: "position",
-                to: {
-                  x: chair.object3D.position.x,
-                  y: chair.object3D.position.y + 0.3,
-                  z: chair.object3D.position.z
-                },
-                dur: 200,
-                dir: "alternate",
-                loop: 1,
-                easing: "easeOutQuad"
-              });
-              setTimeout(() => {
-                chair.removeAttribute("animation__bounce");
-              }, 400);
-            }
-          });
-        }
-      });
-    </script>
-  </head>
+                            // Eliminar animaciÃ³n despuÃ©s de ejecutarse
+                            setTimeout(() => {
+                                chair.removeAttribute("animation__bounce");
+                            }, 400);
+                        }
+                    });
+                }
+            });
+        </script>
+    </head>
 
-  <body>
-    <a-scene vr-mode-ui="enabled: true" xrweb="ar: true" environment="preset: forest; ground: flat">
+    <body>
+        <a-scene vr-mode-ui="enabled: true" xrweb="ar: true" environment="preset: forest; ground: flat">
+            <!-- CONTROLADORES DE META QUEST -->
+            <a-entity
+                id="left-controller"
+                meta-touch-controls="hand: left"
+                raycaster="objects: .selectable; showLine: true"
+                line="color: cyan; opacity: 0.6"
+                chair-selector></a-entity>
 
-      <!-- Suelo visible para facilitar el teletransporte -->
-      <a-plane class="floor" position="0 0 0" rotation="-90 0 0" width="50" height="50" color="#7BC8A4" visible="true"></a-plane>
+            <a-entity
+                id="right-controller"
+                meta-touch-controls="hand: right"
+                raycaster="objects: .selectable; showLine: true"
+                line="color: cyan; opacity: 0.6"
+                chair-selector></a-entity>
 
-      <!-- Cámara dentro de rig movible -->
-      <a-entity id="cameraRig" position="0 0 0">
-        <a-entity camera position="0 1.6 0" look-controls wasd-controls="enabled: false"></a-entity>
-      </a-entity>
+            <!-- MODELOS -->
+            <a-assets>
+                <a-asset-item
+                    id="chair-obj"
+                    src="https://cdn.glitch.global/3b65f8d1-3745-4397-a203-11a3cea57b05/silla.obj?v=1743503312032"></a-asset-item>
+                <a-asset-item
+                    id="chair-mtl"
+                    src="https://cdn.glitch.global/3b65f8d1-3745-4397-a203-11a3cea57b05/Office_chairs.mtl?v=1743493773701"></a-asset-item>
+            </a-assets>
 
-      <!-- Controladores con teletransporte y selección de sillas -->
-      <a-entity
-        id="left-controller"
-        meta-touch-controls="hand: left"
-        teleport-controls="cameraRig: #cameraRig; button: trigger"
-        raycaster="objects: .floor"
-        line="color: red; opacity: 0.8"
-        chair-selector>
-      </a-entity>
+            <!-- SILLAS SELECCIONABLES -->
+            <a-entity
+                class="selectable"
+                obj-model="obj: #chair-obj; mtl: #chair-mtl"
+                position="-2 0 -2"
+                rotation="0 180 0"></a-entity>
 
-      <a-entity
-        id="right-controller"
-        meta-touch-controls="hand: right"
-        teleport-controls="cameraRig: #cameraRig; button: trigger"
-        raycaster="objects: .floor"
-        line="color: red; opacity: 0.8"
-        chair-selector>
-      </a-entity>
+            <a-entity
+                class="selectable"
+                obj-model="obj: #chair-obj; mtl: #chair-mtl"
+                position="0 0 -2"
+                rotation="0 180 0"></a-entity>
 
-      <!-- Carga de modelos -->
-      <a-assets>
-        <a-asset-item id="chair-obj" src="silla.obj"></a-asset-item>
-        <a-asset-item id="chair-mtl" src="Office_chairs.mtl"></a-asset-item>
-      </a-assets>
+            <a-entity
+                class="selectable"
+                obj-model="obj: #chair-obj; mtl: #chair-mtl"
+                position="2 0 -2"
+                rotation="0 180 0"></a-entity>
 
-      <!-- Instancias de sillas -->
-      <a-entity
-        class="selectable"
-        obj-model="obj: #chair-obj; mtl: #chair-mtl"
-        position="-2 0 -2"
-        rotation="0 180 0"></a-entity>
-
-      <a-entity
-        class="selectable"
-        obj-model="obj: #chair-obj; mtl: #chair-mtl"
-        position="0 0 -2"
-        rotation="0 180 0"></a-entity>
-
-      <a-entity
-        class="selectable"
-        obj-model="obj: #chair-obj; mtl: #chair-mtl"
-        position="2 0 -2"
-        rotation="0 180 0"></a-entity>
-
-    </a-scene>
-  </body>
+            <!-- CÃMARA -->
+            <a-entity id="rig" movement-controls position="0 1.6 0">
+                <a-entity camera look-controls wasd-controls position="0 0 0"> </a-entity>
+            </a-entity>
+        </a-scene>
+    </body>
 </html>
