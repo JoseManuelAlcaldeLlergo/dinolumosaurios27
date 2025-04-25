@@ -1,13 +1,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Selección de Sillas AR - Meta Touch Controls</title>
+    <title>SelecciÃ³n de Sillas AR - Meta Touch Controls</title>
     <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
     <script src="./aframe-extras.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.5.0/dist/aframe-environment-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-teleport-controls@^0.3.2/dist/aframe-teleport-controls.min.js"></script>
-
-    <!-- COMPONENTE DE ANIMACIÓN AL CLIC -->
+    <!-- COMPONENTE DE ANIMACIÃ“N AL CLIC -->
     <script>
       AFRAME.registerComponent("chair-selector", {
         init: function () {
@@ -19,61 +17,47 @@
             if (intersections.length > 0) {
               const chair = intersections[0].object.el;
 
-              // Animación de rebote
+              // AnimaciÃ³n de rebote
               chair.setAttribute("animation__bounce", {
                 property: "position",
                 to: {
                   x: chair.object3D.position.x,
                   y: chair.object3D.position.y + 0.3,
-                  z: chair.object3D.position.z,
+                  z: chair.object3D.position.z
                 },
                 dur: 200,
                 dir: "alternate",
                 loop: 1,
-                easing: "easeOutQuad",
+                easing: "easeOutQuad"
               });
 
-              // Eliminar animación después de ejecutarse
+              // Eliminar animaciÃ³n despuÃ©s de ejecutarse
               setTimeout(() => {
                 chair.removeAttribute("animation__bounce");
               }, 400);
             }
           });
-        },
+        }
       });
     </script>
   </head>
 
   <body>
     <a-scene vr-mode-ui="enabled: true" xrweb="ar: true" environment="preset: forest; ground: flat">
-      <!-- SUPERFICIE DE TELETRANSPORTE -->
-      <a-plane
-        teleport-target
-        position="0 0 0"
-        rotation="-90 0 0"
-        width="20"
-        height="20"
-        color="#7BC8A4"
-        visible="false">
-      </a-plane>
-
       <!-- CONTROLADORES DE META QUEST -->
       <a-entity
         id="left-controller"
         meta-touch-controls="hand: left"
         raycaster="objects: .selectable; showLine: true"
         line="color: cyan; opacity: 0.6"
-        chair-selector>
-      </a-entity>
+        chair-selector></a-entity>
 
       <a-entity
         id="right-controller"
         meta-touch-controls="hand: right"
-        teleport-controls="button: trigger; collisionEntities: [teleport-target]; cameraRig: #rig; teleportOrigin: #head"
-        raycaster="objects: .selectable, [teleport-target]; showLine: true"
+        raycaster="objects: .selectable; showLine: true"
         line="color: cyan; opacity: 0.6"
-        chair-selector>
-      </a-entity>
+        chair-selector></a-entity>
 
       <!-- MODELOS -->
       <a-assets>
@@ -104,9 +88,9 @@
         position="2 0 -2"
         rotation="0 180 0"></a-entity>
 
-      <!-- CÁMARA Y RIG -->
-      <a-entity id="rig" movement-controls position="0 1.6 0">
-        <a-entity id="head" camera look-controls wasd-controls position="0 0 0"></a-entity>
+      <!-- CÃMARA -->
+      <a-entity id="rig" movement-controls>
+        <a-entity camera look-controls wasd-controls position="0 0 0"> </a-entity>
       </a-entity>
     </a-scene>
   </body>
