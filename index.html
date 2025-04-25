@@ -44,21 +44,6 @@
 
   <body>
     <a-scene vr-mode-ui="enabled: true" xrweb="ar: true" environment="preset: forest; ground: flat">
-      <!-- CONTROLADORES DE META QUEST -->
-      <a-entity
-        id="left-controller"
-        meta-touch-controls="hand: left"
-        raycaster="objects: .selectable; showLine: true"
-        line="color: cyan; opacity: 0.6"
-        chair-selector></a-entity>
-
-      <a-entity
-        id="right-controller"
-        meta-touch-controls="hand: right"
-        raycaster="objects: .selectable; showLine: true"
-        line="color: cyan; opacity: 0.6"
-        chair-selector></a-entity>
-
       <!-- MODELOS -->
       <a-assets>
         <a-asset-item
@@ -91,6 +76,20 @@
       <!-- CÃMARA -->
       <a-entity id="rig" movement-controls>
         <a-entity camera look-controls wasd-controls position="0 0 0"> </a-entity>
+        <!-- CONTROLADORES DE META QUEST -->
+        <a-entity
+          id="left-controller"
+          meta-touch-controls="hand: left"
+          raycaster="objects: .selectable; showLine: true"
+          line="color: cyan; opacity: 0.6"
+          chair-selector></a-entity>
+
+        <a-entity
+          id="right-controller"
+          meta-touch-controls="hand: right"
+          raycaster="objects: .selectable; showLine: true"
+          line="color: cyan; opacity: 0.6"
+          chair-selector></a-entity>
       </a-entity>
     </a-scene>
   </body>
