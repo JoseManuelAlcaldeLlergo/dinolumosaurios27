@@ -40,19 +40,65 @@
         }
       });
     </script>
+    <script>
+      AFRAME.registerComponent("animation-toggle", {
+        init: function () {
+          const el = this.el;
+          const originalClip = "triceratopsLowPolyv11_LODs";
+          const triggeredClip = "@IdleBreak";
+
+          el.addEventListener("triggerdown", function (evt) {
+            const controller = evt.target;
+            const intersections = controller.components.raycaster.intersections;
+
+            if (intersections.length > 0) {
+              const intersectedEl = intersections[0].object.el;
+              if (intersectedEl === el) {
+                // Cambiar a la animación de IdleBreak
+                el.setAttribute("animation-mixer", {
+                  clip: triggeredClip,
+                  loop: "once",
+                  timeScale: 1
+                });
+
+                // Esperar duración y volver a la animación original
+                el.addEventListener("animation-finished", function restoreOriginal() {
+                  el.setAttribute("animation-mixer", {
+                    clip: originalClip,
+                    loop: "repeat",
+                    timeScale: 1
+                  });
+                  el.removeEventListener("animation-finished", restoreOriginal);
+                });
+              }
+            }
+          });
+        }
+      });
+    </script>
   </head>
 
   <body>
     <a-scene vr-mode-ui="enabled: true" xrweb="ar: true" environment="preset: forest; ground: flat">
       <!-- MODELOS -->
       <a-assets>
+        <a-asset-item id="chair-obj" src="./silla.obj"></a-asset-item>
+        <a-asset-item id="chair-mtl" src="./Office_chairs.mtl"></a-asset-item>
         <a-asset-item
-          id="chair-obj"
-          src="https://cdn.glitch.global/3b65f8d1-3745-4397-a203-11a3cea57b05/silla.obj?v=1743503312032"></a-asset-item>
-        <a-asset-item
-          id="chair-mtl"
-          src="https://cdn.glitch.global/3b65f8d1-3745-4397-a203-11a3cea57b05/Office_chairs.mtl?v=1743493773701"></a-asset-item>
+          src="https://cdn.aframe.io/examples/ar/models/triceratops/scene.gltf"
+          response-type="arraybuffer"></a-asset-item>
       </a-assets>
+
+      <!-- TRICERATOPS ANIMADO -->
+      <a-entity
+        id="triceratops"
+        class="selectable"
+        gltf-model="#triceratops"
+        animation-mixer="clip: triceratopsLowPolyv11_LODs; loop: repeat; timeScale: 1"
+        position="2 0 -3"
+        scale="0.02 0.02 0.02"
+        rotation="0 90 0">
+      </a-entity>
 
       <!-- SILLAS SELECCIONABLES -->
       <a-entity
@@ -61,20 +107,8 @@
         position="-2 0 -2"
         rotation="0 180 0"></a-entity>
 
-      <a-entity
-        class="selectable"
-        obj-model="obj: #chair-obj; mtl: #chair-mtl"
-        position="0 0 -2"
-        rotation="0 180 0"></a-entity>
-
-      <a-entity
-        class="selectable"
-        obj-model="obj: #chair-obj; mtl: #chair-mtl"
-        position="2 0 -2"
-        rotation="0 180 0"></a-entity>
-
-      <!-- CÃMARA -->
-      <a-entity id="rig" movement-controls="speed: 0.3" position="0 0 0">
+      <!-- Camera -->
+      <a-entity id="rig" movement-controls="speed: 0.01" position="0 0 0">
         <a-entity camera look-controls wasd-controls position="0 0 0"> </a-entity>
 
         <!-- CONTROLADORES DE META QUEST -->
@@ -83,14 +117,18 @@
           meta-touch-controls="hand: left"
           raycaster="objects: .selectable; showLine: true"
           line="color: cyan; opacity: 0.6"
-          chair-selector></a-entity>
+          chair-selector
+          animation-toggle>
+        </a-entity>
 
         <a-entity
           id="right-controller"
           meta-touch-controls="hand: right"
           raycaster="objects: .selectable; showLine: true"
           line="color: cyan; opacity: 0.6"
-          chair-selector></a-entity>
+          chair-selector
+          animation-toggle>
+        </a-entity>
       </a-entity>
     </a-scene>
   </body>
