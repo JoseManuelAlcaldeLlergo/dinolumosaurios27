@@ -84,12 +84,12 @@
       <a-assets timeout="10000">
         <a-asset-item id="chair-obj" src="./silla.obj"></a-asset-item>
         <a-asset-item id="chair-mtl" src="./Office_chairs.mtl"></a-asset-item>
-        <a-asset-item src="models/triceratops/scene.gltf" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item id="triceratops" src="models/triceratops/scene.gltf" response-type="arraybuffer"></a-asset-item>
       </a-assets>
 
       <!-- TRICERATOPS ANIMADO -->
       <a-entity
-        id="triceratops"
+        id="triceratops-obj"
         class="selectable"
         gltf-model="#triceratops"
         animation-mixer="clip: triceratopsLowPolyv11_LODs; loop: repeat; timeScale: 1"
