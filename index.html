@@ -55,7 +55,8 @@ w
     <script>
       AFRAME.registerComponent("elevate-camera", {
         init: function () {
-          this.el.addEventListener("click", () => {
+          const el = this.el;
+          el.addEventListener("custom-activated", () => {
             const rig = document.querySelector("#rig");
             if (rig) {
               const pos = rig.getAttribute("position");
@@ -64,6 +65,7 @@ w
                 y: pos.y + 15,
                 z: pos.z
               });
+              console.log("Elevating camera!", pos);
             }
           });
         }
@@ -83,8 +85,16 @@ w
           response-type="arraybuffer"></a-asset-item>
       </a-assets>
 
-      <a-box id="elevate-button" position="0 1.5 -2" width="0.5" height="0.2" depth="0.5" color="green" elevate-camera>
-      </a-box>
+      <a-box id="elevate-button"
+       class="selectable"
+       position="0 1.5 -2"
+       width="0.5"
+       height="0.2"
+       depth="0.5"
+       color="green"
+       elevate-camera>
+</a-box>
+
 
       <!-- TRICERATOPS ANIMADO -->
       <a-entity
