@@ -108,7 +108,27 @@ sdw
         <a-asset-item id="chair-mtl" src="./Office_chairs.mtl"></a-asset-item>
         <a-asset-item
           id="fuente"
-          src="https://cdn.glitch.me/68a66446-b576-4bde-84f6-0b321a80c122/fuente.glb?v=1746377501009"
+          src="https://cdn.glitch.me/68a66446-b576-4bde-84f6-0b321a80c122/fuente_opt.glb?v=1746381194339"
+          response-type="arraybuffer"></a-asset-item>
+        <a-asset-item
+          id="deer"
+          src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/deer_sculpture.glb?v=1746618133286"
+          response-type="arraybuffer"></a-asset-item>
+        <a-asset-item
+          id="cosmos"
+          src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/garden_flower_-_vegetation.glb?v=1747475281802"
+          response-type="arraybuffer"></a-asset-item>
+        <a-asset-item
+          id="roses"
+          src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/rose_flower.glb?v=1747475774044"
+          response-type="arraybuffer"></a-asset-item>
+        <a-asset-item
+          id="lavandula"
+          src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/flower.glb?v=1747475764735"
+          response-type="arraybuffer"></a-asset-item>
+        <a-asset-item
+          id="sunflower"
+          src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/sunflower.glb?v=1747476953576"
           response-type="arraybuffer"></a-asset-item>
         <a-asset-item
           id="triceratops"
@@ -146,17 +166,8 @@ sdw
         rotation="0 90 0">
       </a-entity>
 
-      <!-- Fuente ANIMADA -->
-      <a-entity
-        id="Fuente"
-        class="selectable"
-        gltf-model="#fuente"
-        position="-5 1 -5"
-        scale="0.005 0.005 0.005"
-        rotation="0 90 0"
-        disappear-on-trigger>
+      <a-entity id="deer-obj" class="selectable" gltf-model="#deer" position="2 3 -3" scale="1 1 1" rotation="0 90 0">
       </a-entity>
-      <!--animation-mixer="clip: Object_0; loop: repeat"-->
 
       <!-- Botón TP -->
       <a-box
@@ -185,12 +196,43 @@ sdw
         </a-text>
       </a-entity>
 
-      <!-- SILLAS SELECCIONABLES -->
-      <a-entity
-        class="selectable"
-        obj-model="obj: #chair-obj; mtl: #chair-mtl"
-        position="-2 0 -2"
-        rotation="0 180 0"></a-entity>
+      <a-entity id="huge-flower-parterre" position="-4 -0.3 -5">
+        <!-- Base enorme del parterre -->
+        <a-box
+          width="8"
+          height="0.4"
+          depth="4"
+          color="#8B5A2B"
+          material="roughness: 1; metalness: 0"
+          position="0 0.2 0"></a-box>
+
+        <!-- Bordes reforzados -->
+        <a-box width="8" height="0.3" depth="0.1" color="#5C4033" position="0 0.4 1.95"></a-box>
+        <a-box width="8" height="0.3" depth="0.1" color="#5C4033" position="0 0.4 -1.95"></a-box>
+        <a-box width="0.1" height="0.3" depth="4" color="#5C4033" position="3.95 0.4 0"></a-box>
+        <a-box width="0.1" height="0.3" depth="4" color="#5C4033" position="-3.95 0.4 0"></a-box>
+
+        <!-- Flores Cosmos -->
+        <a-entity gltf-model="#cosmos" position="-3 0.4 -1.5" scale="0.3 0.3 0.3" rotation="0 0 0"></a-entity>
+        <a-entity gltf-model="#cosmos" position="2 0.4 1.2" scale="0.3 0.3 0.3" rotation="0 45 0"></a-entity>
+        <a-entity gltf-model="#cosmos" position="0 0.4 0" scale="0.4 0.4 0.4" rotation="0 30 0"></a-entity>
+
+        <!-- Flores Rosas -->
+        <a-entity gltf-model="#roses" position="-2 0.4 1.5" scale="0.5 0.5 0.5" rotation="0 30 0"></a-entity>
+        <a-entity gltf-model="#roses" position="3 0.4 -1" scale="0.5 0.5 0.5" rotation="0 -20 0"></a-entity>
+        <a-entity gltf-model="#roses" position="0.5 0.4 -1.5" scale="0.5 0.5 0.5" rotation="0 15 0"></a-entity>
+
+        <!-- Flores Lavandula -->
+        <a-entity gltf-model="#lavandula" position="-1 0.4 0.8" scale="0.7 0.7 0.7" rotation="0 0 0"></a-entity>
+        <a-entity gltf-model="#lavandula" position="1 0.4 -0.8" scale="0.8 0.8 0.8" rotation="0 90 0"></a-entity>
+        <a-entity gltf-model="#lavandula" position="1.8 0.4 1" scale="0.7 0.7 0.7" rotation="0 60 0"></a-entity>
+
+        <!-- Flores girasoles -->
+        <a-entity gltf-model="#sunflower" position="-1 0.4 0.8" scale="0.15 0.15 0.15" rotation="0 0 0"></a-entity>
+        <a-entity gltf-model="#sunflower" position="1 0.4 -0.8" scale="0.1 0.1 0.1" rotation="0 90 0"></a-entity>
+        <a-entity gltf-model="#sunflower" position="1 0.4 -0.8" scale="0.1 0.1 0.1" rotation="0 90 0"></a-entity>
+        <a-entity gltf-model="#sunflower" position="1.8 0.4 1" scale="0.12 0.12 0.12" rotation="0 60 0"></a-entity>
+      </a-entity>
 
       <!-- LABERINTO -->
       <a-entity id="maze" position="-20 0 -20">
