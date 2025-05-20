@@ -138,6 +138,10 @@ sdw
           id="trex"
           src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/looping_animation_of_t-_rex_dinosaur_model.glb?v=1747757483145"
           response-type="arraybuffer"></a-asset-item>
+        <a-asset-item
+          id="diplo"
+          src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/diplodocus.glb?v=1747758335978"
+          response-type="arraybuffer"></a-asset-item>
       </a-assets>
 
       <!-- Cartel intro -->
@@ -175,8 +179,18 @@ sdw
         class="selectable"
         gltf-model="#trex"
         animation-mixer="clip: Animation; loop: repeat; timeScale: 1.5; crossFadeDuration: 0.2"
-        position="2 0 -3"
+        position="-9 0 -3"
         scale="0.8 0.8 0.8"
+        rotation="0 90 0">
+      </a-entity>
+
+      <a-entity
+        id="diplo-obj"
+        class="selectable"
+        gltf-model="#diplo"
+        animation-mixer="clip: Animation; loop: repeat; timeScale: 1.5; crossFadeDuration: 0.2"
+        position="-4 0 -28"
+        scale="3 3 3"
         rotation="0 90 0">
       </a-entity>
 
