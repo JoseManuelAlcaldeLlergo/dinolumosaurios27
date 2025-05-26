@@ -124,6 +124,23 @@
         }
       });
     </script>
+
+    <script>
+  AFRAME.registerComponent("attach-to-controller", {
+    init: function () {
+      const el = this.el;
+      el.addEventListener("trigger-activated", function () {
+        const rightController = document.querySelector("#right-controller");
+        if (rightController) {
+          rightController.appendChild(el);
+          el.setAttribute("position", "0 0 -0.2");  // Ajusta para colocar frente al controlador
+          el.setAttribute("rotation", "0 0 0");
+          el.setAttribute("scale", "0.5 0.5 0.5"); // Opcional: escala adecuada en mano
+        }
+      });
+    }
+  });
+</script>
   </head>
 
   <body>
@@ -155,6 +172,10 @@
         <a-asset-item
           id="sunflower"
           src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/sunflower.glb?v=1747476953576"
+          response-type="arraybuffer"></a-asset-item>
+        <a-asset-item
+          id="key"
+          src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/poppy_playtime__poppy_key.glb?v=1747476042352"
           response-type="arraybuffer"></a-asset-item>
         <a-asset-item
           id="triceratops"
@@ -230,6 +251,16 @@
         rotation="0 90 0">
       </a-entity>
 
+      <a-entity
+        id="key-obj"
+        class="selectable"
+        gltf-model="#key"
+        position="-11 2 -1"
+        scale="2 2 2"
+        rotation="270 0 0"
+                attach-to-controller>
+      </a-entity>
+
       <!--
       <a-entity
         id="diplo-obj"
@@ -273,8 +304,8 @@
 
 
 
-      <a-entity id="parterre-boton" position="-2.5 -0.2 -3" disappear-on-trigger>
-       <a-entity id="huge-flower-parterre">
+      <a-entity id="parterre-boton" position="-2.5 -0.2 -3">
+       <a-entity id="huge-flower-parterre" disappear-on-trigger>
         <!-- Base enorme del parterre -->
           <a-box
             width="8"
