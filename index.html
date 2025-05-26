@@ -67,6 +67,33 @@
     </script>
 
     <script>
+      AFRAME.registerComponent("baby-anim", {
+        init: function () {
+          const el = this.el;
+          const originalClip = "Idle";
+          const triggeredClip = "LookAround";
+
+          el.addEventListener("trigger-activated", function () {
+            el.setAttribute("animation-mixer", {
+              clip: triggeredClip,
+              loop: "once",
+              timeScale: 1
+            });
+
+            el.addEventListener("animation-finished", function restore() {
+              el.setAttribute("animation-mixer", {
+                clip: originalClip,
+                loop: "repeat",
+                timeScale: 1
+              });
+              el.removeEventListener("animation-finished", restore);
+            });
+          });
+        }
+      });
+    </script>
+
+    <script>
       AFRAME.registerComponent("elevate-camera", {
         init: function () {
           const el = this.el;
@@ -210,6 +237,17 @@
         rotation="0 90 0">
       </a-entity>
       -->
+
+      <a-entity
+        id="diplo-bebe-obj"
+        class="selectable"
+        gltf-model="#diplo-bebe"
+        animation-mixer="clip: Idle; loop: repeat; timeScale: 1.5; crossFadeDuration: 0.2"
+        baby-anim
+        position="-4 0 -23"
+        scale="1 1 1"
+        rotation="0 90 0">
+      </a-entity>
 
       <a-entity id="deer-obj" class="selectable" gltf-model="#deer" position="2 3 -3" scale="1 1 1" rotation="0 90 0">
       </a-entity>
