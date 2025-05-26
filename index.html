@@ -6,28 +6,22 @@
     <script src="./aframe-extras.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.5.0/dist/aframe-environment-component.min.js"></script>
     <!-- COMPONENTE DE ANIMACION AL CLIC -->
-   <script>
-  AFRAME.registerComponent("raycaster-click-emitter", {
-    init: function () {
-      const controllerEl = this.el;
-      controllerEl.addEventListener("triggerdown", function () {
-        const intersections = controllerEl.components.raycaster.intersections;
-        if (intersections.length > 0) {
-          let targetEl = intersections[0].object.el;
-
-          // Buscar el ancestro con el componente disappear-on-trigger
-          while (targetEl && !targetEl.components["disappear-on-trigger"]) {
-            targetEl = targetEl.parentEl;
-          }
-
-          if (targetEl) {
-            targetEl.emit("trigger-activated");
-          }
+  <script>
+      AFRAME.registerComponent("raycaster-click-emitter", {
+        init: function () {
+          const controllerEl = this.el;
+          controllerEl.addEventListener("triggerdown", function () {
+            const intersections = controllerEl.components.raycaster.intersections;
+            if (intersections.length > 0) {
+              const targetEl = intersections[0].object.el;
+              if (targetEl) {
+                targetEl.emit("trigger-activated");
+              }
+            }
+          });
         }
       });
-    }
-  });
-</script>
+    </script>
 
     <script>
       AFRAME.registerComponent("raycaster-button-a", {
@@ -250,7 +244,7 @@
         position="-11 2 -1"
         scale="2 2 2"
         rotation="270 0 0"
-                attach-to-controller>
+                disappear-on-trigger>
       </a-entity>
 
       <!--
@@ -407,7 +401,7 @@
         </a-entity>
       </a-entity>
 
-      <a-entity id="sky-gallery" position="0 10 0">
+      <a-entity id="sky-gallery" position="0 30 0">
   <!-- Suelo del pasillo -->
   <a-box
     position="0 0 0"
@@ -443,7 +437,7 @@
       <!-- Camera -->
       <!-- <a-entity id="rig" movement-controls="speed: 0.025" position="-4 30 35"> -->
       <!--<a-entity id="rig" movement-controls="speed: 0.05" position="0 2 0">-->
-      <a-entity id="rig" movement-controls="speed: 0.05" position="0 20 0">
+      <a-entity id="rig" movement-controls="speed: 0.05" position="0 2 0">
         <a-entity camera look-controls wasd-controls position="0 3 0"> </a-entity>
         <!-- CONTROLADORES DE META QUEST -->
         <a-entity
