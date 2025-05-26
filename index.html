@@ -6,22 +6,29 @@
     <script src="./aframe-extras.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.5.0/dist/aframe-environment-component.min.js"></script>
     <!-- COMPONENTE DE ANIMACION AL CLIC -->
-    <script>
-      AFRAME.registerComponent("raycaster-click-emitter", {
-        init: function () {
-          const controllerEl = this.el;
-          controllerEl.addEventListener("triggerdown", function () {
-            const intersections = controllerEl.components.raycaster.intersections;
-            if (intersections.length > 0) {
-              const targetEl = intersections[0].object.el;
-              if (targetEl) {
-                targetEl.emit("trigger-activated");
-              }
-            }
-          });
+   <script>
+  AFRAME.registerComponent("raycaster-click-emitter", {
+    init: function () {
+      const controllerEl = this.el;
+      controllerEl.addEventListener("triggerdown", function () {
+        const intersections = controllerEl.components.raycaster.intersections;
+        if (intersections.length > 0) {
+          let targetEl = intersections[0].object.el;
+
+          // Buscar el ancestro con el componente disappear-on-trigger
+          while (targetEl && !targetEl.components["disappear-on-trigger"]) {
+            targetEl = targetEl.parentEl;
+          }
+
+          if (targetEl) {
+            targetEl.emit("trigger-activated");
+          }
         }
       });
-    </script>
+    }
+  });
+</script>
+
     <script>
       AFRAME.registerComponent("raycaster-button-a", {
         init: function () {
@@ -399,6 +406,39 @@
           <a-box position="13 3 11" width="1" height="6" depth="1" color="#4CC3D9"></a-box>
         </a-entity>
       </a-entity>
+
+      <a-entity id="sky-gallery" position="0 10 0">
+  <!-- Suelo del pasillo -->
+  <a-box
+    position="0 0 0"
+    width="10"
+    height="0.2"
+    depth="4"
+    color="#999999"
+    material="src: #seto; repeat: 10 1; roughness: 1; metalness: 0">
+  </a-box>
+
+  <!-- Pared izquierda -->
+  <a-box
+    position="-5 2 0"
+    width="0.1"
+    height="4"
+    depth="4"
+    color="#ffffff"
+    material="src: #sanson; repeat: 1 1; side: double; roughness: 1">
+  </a-box>
+
+  <!-- Pared derecha -->
+  <a-box
+    position="5 2 0"
+    width="0.1"
+    height="4"
+    depth="4"
+    color="#ffffff"
+    material="src: #sanson; repeat: 1 1; side: double; roughness: 1">
+  </a-box>
+</a-entity>
+
 
       <!-- Camera -->
       <!-- <a-entity id="rig" movement-controls="speed: 0.025" position="-4 30 35"> -->
