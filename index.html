@@ -129,13 +129,16 @@
   AFRAME.registerComponent("attach-to-controller", {
     init: function () {
       const el = this.el;
+
       el.addEventListener("trigger-activated", function () {
-        const rightController = document.querySelector("#right-controller");
-        if (rightController) {
-          rightController.appendChild(el);
-          el.setAttribute("position", "0 0 -0.2");  // Ajusta para colocar frente al controlador
-          el.setAttribute("rotation", "0 0 0");
-          el.setAttribute("scale", "0.5 0.5 0.5"); // Opcional: escala adecuada en mano
+        const controller = document.querySelector("#right-controller");
+        if (controller && el.parentNode !== controller) {
+          controller.appendChild(el);
+
+          // Espera a que el objeto se acople para ajustar posición
+          el.object3D.position.set(0, -0.05, -0.15); // justo delante de la mano
+          el.object3D.rotation.set(0, 0, 0);         // sin rotación
+          el.object3D.scale.set(0.1, 0.1, 0.1);      // escala reducida
         }
       });
     }
@@ -301,11 +304,34 @@
 
       <!-- Botón TP -->
 
+<!-- TP -->
+      <a-entity position="0 1 0" rotation="270 0 0">
+        <!-- Fondo del cartel (madera) -->
+        <a-box width="2" height="1" depth="0.1" color="#8B5A2B" material="roughness: 1; metalness: 0"> </a-box>
+
+        <!-- Texto encima del cartel -->
+        <a-text
+          value="Pulsame :D\n\n(No me deja poner tildes >:[ )"
+          color="white"
+          align="center"
+          width="2"
+          position="0 0 0.06">
+        </a-text>
+
+        <a-box
+        id="elevate-button"
+        class="selectable"
+        position="0 -0.5 0"
+        width="0.5"
+        height="0.2"
+        depth="0.5"
+        color="green"
+        elevate-camera>
+      </a-box>
+      </a-entity>
 
 
-
-      <a-entity id="parterre-boton" position="-2.5 -0.2 -3">
-       <a-entity id="huge-flower-parterre" disappear-on-trigger>
+      <a-entity id="parterre-boton" position="-2.5 -0.2 -3" disappear-on-trigger>
         <!-- Base enorme del parterre -->
           <a-box
             width="8"
@@ -345,33 +371,6 @@
 
         </a-entity>
 
-      <!-- TP -->
-      <a-entity position="0 1 0" rotation="270 0 0">
-        <!-- Fondo del cartel (madera) -->
-        <a-box width="2" height="1" depth="0.1" color="#8B5A2B" material="roughness: 1; metalness: 0"> </a-box>
-
-        <!-- Texto encima del cartel -->
-        <a-text
-          value="Pulsame :D\n\n(No me deja poner tildes >:[ )"
-          color="white"
-          align="center"
-          width="2"
-          position="0 0 0.06">
-        </a-text>
-
-        <a-box
-        id="elevate-button"
-        class="selectable"
-        position="0 -0.5 0"
-        width="0.5"
-        height="0.2"
-        depth="0.5"
-        color="green"
-        elevate-camera>
-      </a-box>
-      </a-entity>
-
-      </a-entity>
 
       <!-- LABERINTO -->
       <a-entity id="maze" position="-20 0 -20">
@@ -422,7 +421,7 @@
       <!-- Camera -->
       <!-- <a-entity id="rig" movement-controls="speed: 0.025" position="-4 30 35"> -->
       <!--<a-entity id="rig" movement-controls="speed: 0.05" position="0 2 0">-->
-      <a-entity id="rig" movement-controls="speed: 0.05" position="0 02 0">
+      <a-entity id="rig" movement-controls="speed: 0.05" position="0 2 0">
         <a-entity camera look-controls wasd-controls position="0 3 0"> </a-entity>
         <!-- CONTROLADORES DE META QUEST -->
         <a-entity
