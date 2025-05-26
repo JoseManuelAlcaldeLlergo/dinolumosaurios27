@@ -164,18 +164,22 @@
           id="trex"
           src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/looping_animation_of_t-_rex_dinosaur_model.glb?v=1747757483145"
           response-type="arraybuffer"></a-asset-item>
+        <!--
         <a-asset-item
           id="diplo"
           src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/diplodocus.glb?v=1747758335978"
           response-type="arraybuffer"></a-asset-item>
+          -->
         <a-asset-item
           id="diplo-bebe"
           src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/dinomei.glb?v=1747758232184"
           response-type="arraybuffer"></a-asset-item>
+        <!--
         <a-asset-item
           id="diplo-space"
           src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/dinomei_space_explorer.glb?v=1747758300074"
           response-type="arraybuffer"></a-asset-item>
+          -->
 
         <img id="sanson" src="sanson.jpeg" />
         <img id="cesped" src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/1601.m10.i311.n029.S.c10.164511620%20Seamless%20green%20grass%20vector%20pattern.jpg?v=1747477475492" />
@@ -248,24 +252,70 @@
         scale="2 2 2"
         rotation="0 90 0">
       </a-entity>
+      <!--
+      <a-entity
+        id="diplo-space-obj"
+        class="selectable"
+        gltf-model="#diplo-space"
+        animation-mixer="clip: Floating; loop: repeat; timeScale: 1.5; crossFadeDuration: 0.2"
+        baby-anim
+        position="-4 30 -23"
+        scale="1 1 1"
+        rotation="0 0 0">
+      </a-entity>
+      -->
 
       <a-entity id="deer-obj" class="selectable" gltf-model="#deer" position="2 3 -3" scale="1 1 1" rotation="0 90 0">
       </a-entity>
 
       <!-- Botón TP -->
-      <a-box
-        id="elevate-button"
-        class="selectable"
-        position="-5 0 -5"
-        width="0.5"
-        height="0.2"
-        depth="0.5"
-        color="green"
-        elevate-camera>
-      </a-box>
 
-      <!-- Cartel tp -->
-      <a-entity position="-5 0 -4" rotation="270 0 0">
+
+
+
+      <a-entity id="parterre-boton" position="-2.5 -0.2 -3" disappear-on-trigger>
+       <a-entity id="huge-flower-parterre">
+        <!-- Base enorme del parterre -->
+          <a-box
+            width="8"
+            height="0.4"
+            depth="4"
+            color="#8B5A2B"
+            material="src: https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/coast_sand_05_diff_4k.jpg?v=1747762928185;color: #aaffaa; repeat: 4 2; roughness: 0; metalness: 0;"
+            position="0 0.2 0"></a-box>
+
+          <!-- Bordes reforzados -->
+          <a-box width="8" height="0.3" depth="0.1" color="#5C4033" position="0 0.4 1.95"></a-box>
+          <a-box width="8" height="0.3" depth="0.1" color="#5C4033" position="0 0.4 -1.95"></a-box>
+          <a-box width="0.1" height="0.3" depth="4" color="#5C4033" position="3.95 0.4 0"></a-box>
+          <a-box width="0.1" height="0.3" depth="4" color="#5C4033" position="-3.95 0.4 0"></a-box>
+
+          <!-- Flores Cosmos -->
+          <a-entity gltf-model="#cosmos" position="-3 0.4 -1.1" scale="0.3 0.3 0.3" rotation="0 0 0"></a-entity>
+          <a-entity gltf-model="#cosmos" position="3 0.4 -1" scale="0.3 0.3 0.3" rotation="0 45 0"></a-entity>
+          <a-entity gltf-model="#cosmos" position="0 0.4 1" scale="0.4 0.4 0.4" rotation="0 30 0"></a-entity>
+
+          <!-- Flores Rosas -->
+          <a-entity gltf-model="#roses" position="-2.5 0.4 1.5" scale="0.55 0.55 0.55" rotation="0 30 0"></a-entity>
+          <a-entity gltf-model="#roses" position="3 0.4 -1" scale="0.5 0.5 0.5" rotation="0 -20 0"></a-entity>
+          <a-entity gltf-model="#roses" position="0.5 0.4 -1.5" scale="0.5 0.5 0.5" rotation="0 15 0"></a-entity>
+          <a-entity gltf-model="#roses" position="1.6 0.4 0.4" scale="0.5 0.5 0.5" rotation="0 15 0"></a-entity>
+
+          <!-- Flores Lavandula -->
+          <a-entity gltf-model="#lavandula" position="-1.5 0.4 0.7" scale="0.7 0.7 0.7" rotation="0 0 0"></a-entity>
+          <a-entity gltf-model="#lavandula" position="1.6 0.4 -0.8" scale="0.8 0.8 0.8" rotation="0 90 0"></a-entity>
+          <a-entity gltf-model="#lavandula" position="1.8 0.4 1.8" scale="0.7 0.7 0.7" rotation="0 60 0"></a-entity>
+
+          <!-- Flores girasoles -->
+          <a-entity gltf-model="#sunflower" position="-0.9 0.4 -1" scale="0.15 0.15 0.15" rotation="0 0 0"></a-entity>
+          <a-entity gltf-model="#sunflower" position="1 0.4 -0.8" scale="0.1 0.1 0.1" rotation="0 90 0"></a-entity>
+          <a-entity gltf-model="#sunflower" position="1 0.4 -0.8" scale="0.1 0.1 0.1" rotation="0 90 0"></a-entity>
+          <a-entity gltf-model="#sunflower" position="2.7 0.4 1" scale="0.12 0.12 0.12" rotation="0 60 0"></a-entity>
+
+        </a-entity>
+
+      <!-- TP -->
+      <a-entity position="0 1 0" rotation="270 0 0">
         <!-- Fondo del cartel (madera) -->
         <a-box width="2" height="1" depth="0.1" color="#8B5A2B" material="roughness: 1; metalness: 0"> </a-box>
 
@@ -277,45 +327,19 @@
           width="2"
           position="0 0 0.06">
         </a-text>
+
+        <a-box
+        id="elevate-button"
+        class="selectable"
+        position="0 -0.5 0"
+        width="0.5"
+        height="0.2"
+        depth="0.5"
+        color="green"
+        elevate-camera>
+      </a-box>
       </a-entity>
 
-      <a-entity id="huge-flower-parterre" position="-4 -0.2 -5">
-        <!-- Base enorme del parterre -->
-        <a-box
-          width="8"
-          height="0.4"
-          depth="4"
-          color="#8B5A2B"
-          material="src: https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/coast_sand_05_diff_4k.jpg?v=1747762928185;color: #aaffaa; repeat: 4 2; roughness: 0; metalness: 0;"
-          position="0 0.2 0"></a-box>
-
-        <!-- Bordes reforzados -->
-        <a-box width="8" height="0.3" depth="0.1" color="#5C4033" position="0 0.4 1.95"></a-box>
-        <a-box width="8" height="0.3" depth="0.1" color="#5C4033" position="0 0.4 -1.95"></a-box>
-        <a-box width="0.1" height="0.3" depth="4" color="#5C4033" position="3.95 0.4 0"></a-box>
-        <a-box width="0.1" height="0.3" depth="4" color="#5C4033" position="-3.95 0.4 0"></a-box>
-
-        <!-- Flores Cosmos -->
-        <a-entity gltf-model="#cosmos" position="-3 0.4 -1.1" scale="0.3 0.3 0.3" rotation="0 0 0"></a-entity>
-        <a-entity gltf-model="#cosmos" position="3 0.4 -1" scale="0.3 0.3 0.3" rotation="0 45 0"></a-entity>
-        <a-entity gltf-model="#cosmos" position="0 0.4 1" scale="0.4 0.4 0.4" rotation="0 30 0"></a-entity>
-
-        <!-- Flores Rosas -->
-        <a-entity gltf-model="#roses" position="-2.5 0.4 1.5" scale="0.55 0.55 0.55" rotation="0 30 0"></a-entity>
-        <a-entity gltf-model="#roses" position="3 0.4 -1" scale="0.5 0.5 0.5" rotation="0 -20 0"></a-entity>
-        <a-entity gltf-model="#roses" position="0.5 0.4 -1.5" scale="0.5 0.5 0.5" rotation="0 15 0"></a-entity>
-        <a-entity gltf-model="#roses" position="1.6 0.4 0.4" scale="0.5 0.5 0.5" rotation="0 15 0"></a-entity>
-
-        <!-- Flores Lavandula -->
-        <a-entity gltf-model="#lavandula" position="-1.5 0.4 0.7" scale="0.7 0.7 0.7" rotation="0 0 0"></a-entity>
-        <a-entity gltf-model="#lavandula" position="1.6 0.4 -0.8" scale="0.8 0.8 0.8" rotation="0 90 0"></a-entity>
-        <a-entity gltf-model="#lavandula" position="1.8 0.4 1.8" scale="0.7 0.7 0.7" rotation="0 60 0"></a-entity>
-
-        <!-- Flores girasoles -->
-        <a-entity gltf-model="#sunflower" position="-0.9 0.4 -1" scale="0.15 0.15 0.15" rotation="0 0 0"></a-entity>
-        <a-entity gltf-model="#sunflower" position="1 0.4 -0.8" scale="0.1 0.1 0.1" rotation="0 90 0"></a-entity>
-        <a-entity gltf-model="#sunflower" position="1 0.4 -0.8" scale="0.1 0.1 0.1" rotation="0 90 0"></a-entity>
-        <a-entity gltf-model="#sunflower" position="2.7 0.4 1" scale="0.12 0.12 0.12" rotation="0 60 0"></a-entity>
       </a-entity>
 
       <!-- LABERINTO -->
@@ -324,10 +348,16 @@
         <!--<a-box position="15 0.5 15" width="5" height="1" depth="5" color="#FFC65D"></a-box>-->
 
         <!-- Muros exteriores -->
-        <a-box position="15 3 0" width="30" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 5 ;"></a-box>
-        <a-box position="15 3 30" width="30" height="6" depth="1" color="#4CC3D9"></a-box>
-        <a-box position="0 3 15" width="1" height="6" depth="30" color="#4CC3D9"></a-box>
-        <a-box position="30 3 15" width="1" height="6" depth="30" color="#4CC3D9"></a-box>
+        <a-box position="17 3 0" width="35" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 5 ;"></a-box>
+        <a-box position="18 3 35" width="35" height="6" depth="1" color="#4CC3D9"></a-box>
+        <a-box position="0 3 18" width="1" height="6" depth="35" color="#4CC3D9"></a-box>
+        <a-box position="35 3 17" width="1" height="6" depth="35" color="#4CC3D9"></a-box>
+
+        <!--Centro-->
+        <!--
+        <a-box position="17.5 3 17" width="1" height="6" depth="35" color="#4CC3D9"></a-box>
+        <a-box position="17.5 3 17" width="1" height="6" depth="35" rotation="0 90 0" color="#4CC3D9"></a-box>
+        -->
 
         <a-entity id="A" position="-12 0 -10">
           <a-box position="0 3 0" width="3" height="6" depth="1" color="#4CC3D9"></a-box>
@@ -360,7 +390,8 @@
 
       <!-- Camera -->
       <!-- <a-entity id="rig" movement-controls="speed: 0.025" position="-4 30 35"> -->
-      <a-entity id="rig" movement-controls="speed: 0.05" position="0 2 0">
+      <!--<a-entity id="rig" movement-controls="speed: 0.05" position="0 2 0">-->
+      <a-entity id="rig" movement-controls="speed: 0.05" position="0 02 0">
         <a-entity camera look-controls wasd-controls position="0 3 0"> </a-entity>
         <!-- CONTROLADORES DE META QUEST -->
         <a-entity
