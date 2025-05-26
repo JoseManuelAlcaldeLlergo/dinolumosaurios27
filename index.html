@@ -125,25 +125,7 @@
       });
     </script>
 
-<script>
-  AFRAME.registerComponent("attach-to-controller", {
-    init: function () {
-      const el = this.el;
 
-      el.addEventListener("trigger-activated", function () {
-        const controller = document.querySelector("#right-controller");
-        if (controller && el.parentNode !== controller) {
-          controller.appendChild(el);
-
-          // Espera a que el objeto se acople para ajustar posición
-          el.object3D.position.set(0, -0.05, -0.15); // justo delante de la mano
-          el.object3D.rotation.set(0, 0, 0);         // sin rotación
-          el.object3D.scale.set(0.1, 0.1, 0.1);      // escala reducida
-        }
-      });
-    }
-  });
-</script>
   </head>
 
   <body>
@@ -249,7 +231,7 @@
         class="selectable"
         gltf-model="#trex"
         animation-mixer="clip: Animation; loop: repeat; timeScale: 1.5; crossFadeDuration: 0.2"
-        position="-9 0 -3"
+        position="-16 0 4"
         scale="0.8 0.8 0.8"
         rotation="0 90 0">
       </a-entity>
@@ -282,9 +264,9 @@
         gltf-model="#diplo-bebe"
         animation-mixer="clip: Idle; loop: repeat; timeScale: 1.5; crossFadeDuration: 0.2"
         baby-anim
-        position="-4 0 -23"
+        position="23 0 1"
         scale="2 2 2"
-        rotation="0 90 0">
+        rotation="0 270 0">
       </a-entity>
       <!--
       <a-entity
@@ -331,7 +313,7 @@
       </a-entity>
 
 
-      <a-entity id="parterre-boton" position="-2.5 -0.2 -3" disappear-on-trigger>
+      <a-entity id="parterre" class="selectable" position="-2.5 -0.2 -3" disappear-on-trigger>
         <!-- Base enorme del parterre -->
           <a-box
             width="8"
@@ -421,7 +403,7 @@
       <!-- Camera -->
       <!-- <a-entity id="rig" movement-controls="speed: 0.025" position="-4 30 35"> -->
       <!--<a-entity id="rig" movement-controls="speed: 0.05" position="0 2 0">-->
-      <a-entity id="rig" movement-controls="speed: 0.05" position="0 2 0">
+      <a-entity id="rig" movement-controls="speed: 0.05" position="0 20 0">
         <a-entity camera look-controls wasd-controls position="0 3 0"> </a-entity>
         <!-- CONTROLADORES DE META QUEST -->
         <a-entity
