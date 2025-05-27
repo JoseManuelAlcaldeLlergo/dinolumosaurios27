@@ -41,15 +41,15 @@
     </script>
 
     <script>
-      AFRAME.registerComponent("raycaster-button-b", {
+      AFRAME.registerComponent("raycaster-button-y", {
         init: function () {
           const controllerEl = this.el;
-          controllerEl.addEventListener("bbuttondown", function () {
+          controllerEl.addEventListener("ybuttondown", function () {
             const intersections = controllerEl.components.raycaster.intersections;
             if (intersections.length > 0) {
               const targetEl = intersections[0].object.el;
               if (targetEl) {
-                targetEl.emit("bbutton-activated");
+                targetEl.emit("ybutton-activated");
               }
             }
           });
@@ -138,22 +138,12 @@
       });
     </script>
 
-    <script>
-      AFRAME.registerComponent("disappear-on-trigger", {
-        init: function () {
-          const el = this.el;
-          el.addEventListener("trigger-activated", function () {
-            el.setAttribute("visible", false);
-            console.log("Fuente desactivada.");
-          });
-        }
-      });
-    </script>
+
     <script>
   AFRAME.registerComponent("key-activates-parterre", {
     init: function () {
       const keyEl = this.el;
-      keyEl.addEventListener("bbutton-activated", function () {
+      keyEl.addEventListener("ybutton-activated", function () {
         const parterre = document.querySelector("#parterre");
         if (parterre) {
           parterre.setAttribute("visible", false);
@@ -487,6 +477,7 @@
           meta-touch-controls="hand: left"
           raycaster="objects: .selectable; showLine: true"
           line="color: cyan; opacity: 0.6"
+          raycaster-button-y
           raycaster-click-emitter>
         </a-entity>
 
