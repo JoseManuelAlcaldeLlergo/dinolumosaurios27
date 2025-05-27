@@ -48,6 +48,13 @@
           const triggeredClip = "@IdleBreak";
 
           el.addEventListener("trigger-activated", function () {
+
+            // Reproduce el sonido
+            if (el.components.sound) {
+              el.components.sound.playSound();
+            }
+
+            // Reproduce la animacion
             el.setAttribute("animation-mixer", {
               clip: triggeredClip,
               loop: "once",
@@ -239,6 +246,7 @@
         gltf-model="#triceratops"
         animation-mixer="clip: triceratopsLowPolyv11_LODs; loop: repeat; timeScale: 1"
         triceratops-anim
+        sound="src: url(https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/rugido.mp3?v=1748370827985); positional: true; volume: 1.0"
         position="2 0 -3"
         scale="0.02 0.02 0.02"
         rotation="0 90 0">
