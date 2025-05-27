@@ -41,6 +41,23 @@
     </script>
 
     <script>
+      AFRAME.registerComponent("raycaster-button-b", {
+        init: function () {
+          const controllerEl = this.el;
+          controllerEl.addEventListener("bbuttondown", function () {
+            const intersections = controllerEl.components.raycaster.intersections;
+            if (intersections.length > 0) {
+              const targetEl = intersections[0].object.el;
+              if (targetEl) {
+                targetEl.emit("bbutton-activated");
+              }
+            }
+          });
+        }
+      });
+    </script>
+
+    <script>
       AFRAME.registerComponent("triceratops-anim", {
         init: function () {
           const el = this.el;
@@ -136,7 +153,7 @@
   AFRAME.registerComponent("key-activates-parterre", {
     init: function () {
       const keyEl = this.el;
-      keyEl.addEventListener("trigger-activated", function () {
+      keyEl.addEventListener("bbutton-activated", function () {
         const parterre = document.querySelector("#parterre");
         if (parterre) {
           parterre.setAttribute("visible", false);
