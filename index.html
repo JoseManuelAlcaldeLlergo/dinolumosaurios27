@@ -470,19 +470,11 @@
           <a-box position="1 3 0" width="1" height="5.5" depth="12" material="src:#seto;color: #ccffcc; repeat: 1 ;"
                  rotation="0 0 -24"></a-box>
         </a-entity>
-        <a-entity id="V-cover" position="4 6.02 8" rotation="90 0 180" color="#ccffcc">
-          <a-box position="-1 3 0" width="1" height="5.5" depth=".00001"
-                 rotation="0 0 24"></a-box>
-          <a-box position="1 3 0" width="1" height="5.5" depth=".01"
-                 rotation="0 0 -24"></a-box>
-        </a-entity>
 
         <a-entity id="I" position="9 0 3">
           <a-box position="0 3 2" width="1" height="6" depth="5" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
         </a-entity>
-        <a-entity id="I-cover" position="9 6.02 3" scale=".98 .001 .98" color="#ccffcc">
-          <a-box position="0 3 2" width="1" height=".01" depth="5" ></a-box>
-        </a-entity>
+
 
         <a-entity id="R" position="13 0 3" color="#ccffcc">
           <a-box position="0 3 0" width="3" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
@@ -491,13 +483,7 @@
           <a-box position="0 3 2" width="3" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
           <a-box position="0 3 3.1" rotation="0 -45 0" width="3.4" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
         </a-entity>
-        <a-entity id="R-cover" position="13 6.02 3" scale=".98 .001 .98" color="#ccffcc">
-          <a-box position="0 3 0" width="3" height="6" depth="1" ></a-box>
-          <a-box position="-1 3 2" width="1" height="6" depth="5"></a-box>
-          <a-box position="1 3 1" width="1" height="6" depth="2" ></a-box>
-          <a-box position="0 3 2" width="3" height="6" depth="1"></a-box>
-          <a-box position="0 3 3.1" rotation="0 -45 0" width="3.4" height="6" depth="1" ></a-box>
-        </a-entity>
+
 
         <a-entity id="T" position="18 0 5">
         <a-box position="0 3 -2" width="4" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
@@ -522,6 +508,56 @@
           <a-box position="-1 3 1.5" width="1" height="6" depth="4" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
         </a-entity>
 
+        <!-- Cover VIRTUAL -->
+        <a-entity id="V-cover" position="4 6.02 8" rotation="90 0 180">
+          <a-box position="-1 3 0" width="1" height="5.5" depth=".00001"
+                 rotation="0 0 24" material="color:#FFEB3B"></a-box>
+          <a-box position="1 3 0" width="1" height="5.5" depth=".01"
+                 rotation="0 0 -24" material="color:#FFEB3B"></a-box>
+        </a-entity>
+
+        <!-- I cover -->
+        <a-entity id="I-cover" position="9 6.02 3" scale=".98 .001 .98" color="#ccffcc">
+          <a-box position="0 3 2" width="1" height=".01" depth="5" ></a-box>
+        </a-entity>
+
+        <!-- R cover -->
+        <a-entity id="R-cover" position="13 6.02 3" scale=".98 .001 .98" color="#ccffcc">
+          <a-box position="0 3 0" width="3" height="6" depth="1" ></a-box>
+          <a-box position="-1 3 2" width="1" height="6" depth="5"></a-box>
+          <a-box position="1 3 1" width="1" height="6" depth="2" ></a-box>
+          <a-box position="0 3 2" width="3" height="6" depth="1"></a-box>
+          <a-box position="0 3 3.1" rotation="0 -45 0" width="3.4" height="6" depth="1" ></a-box>
+        </a-entity>
+
+        <!-- T cover -->
+        <a-entity id="T-cover" position="18 6.02 5" scale=".98 .001 .98" color="#ccffcc">
+          <a-box position="0 3 -2" width="4" height="6" depth="1"></a-box>
+          <a-box position="0 3 0" width="1" height="6" depth="5"></a-box>
+        </a-entity>
+
+        <!-- U cover -->
+        <a-entity id="U-cover" position="23 6.02 3" scale=".98 .001 .98" color="#ccffcc">
+          <a-box position="0 3 4" width="3" height="6" depth="1"></a-box>
+          <a-box position="-1 3 1.5" width="1" height="6" depth="4"></a-box>
+          <a-box position="1 3 1.5" width="1" height="6" depth="4"></a-box>
+        </a-entity>
+
+        <!-- A cover -->
+        <a-entity id="A-cover" position="27.5 6.02 3" scale=".98 .001 .98" color="#ccffcc">
+          <a-box position="0 3 0" width="3" height="6" depth="1"></a-box>
+          <a-box position="-1 3 2.5" width="1" height="6" depth="4"></a-box>
+          <a-box position="1 3 2.5" width="1" height="6" depth="4"></a-box>
+          <a-box position="0 3 2" width="3" height="6" depth="1"></a-box>
+        </a-entity>
+
+        <!-- L cover -->
+        <a-entity id="L-cover" position="32 6.02 3" scale=".98 .001 .98" color="#ccffcc">
+          <a-box position="0 3 4" width="3" height="6" depth="1"></a-box>
+          <a-box position="-1 3 1.5" width="1" height="6" depth="4"></a-box>
+        </a-entity>
+
+        <!-- O -->
         <a-entity id="O" position="10 0 10">
           <a-box position="0 3 4" width="3" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
           <a-box position="0 3 0" width="3" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
@@ -529,35 +565,77 @@
           <a-box position="1 3 2" width="1" height="6" depth="3" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
         </a-entity>
 
+        <!-- Cover O -->
+        <a-entity id="O-cover" position="10 6.02 10" scale=".98 .001 .98" color="#ccffcc">
+          <a-box position="0 3 4" width="3" height="6" depth="1"></a-box>
+          <a-box position="0 3 0" width="3" height="6" depth="1"></a-box>
+          <a-box position="-1 3 2" width="1" height="6" depth="3"></a-box>
+          <a-box position="1 3 2" width="1" height="6" depth="3"></a-box>
+        </a-entity>
+
+        <!-- REAL -->
         <a-entity id="REAL" position="9 0 0">
           <a-entity id="R2" position="9 0 10">
-          <a-box position="0 3 0" width="3" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
-          <a-box position="-1 3 2" width="1" height="6" depth="5" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
-          <a-box position="1 3 1" width="1" height="6" depth="2" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
-          <a-box position="0 3 2" width="3" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
-          <a-box position="0 3 3.1" rotation="0 -45 0" width="3.4" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
+            <a-box position="0 3 0" width="3" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
+            <a-box position="-1 3 2" width="1" height="6" depth="5" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
+            <a-box position="1 3 1" width="1" height="6" depth="2" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
+            <a-box position="0 3 2" width="3" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
+            <a-box position="0 3 3.1" rotation="0 -45 0" width="3.4" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
+          </a-entity>
+
+          <a-entity id="E" position="13 0 10">
+            <a-box position="0 3 0" width="2" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
+            <a-box position="0 3 4" width="2" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
+            <a-box position="-1 3 2" width="1" height="6" depth="3" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
+            <a-box position="0.2 3 2" width="1.5" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
+          </a-entity>
+
+          <a-entity id="A2" position="17 0 10">
+            <a-box position="0 3 0" width="3" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
+            <a-box position="-1 3 2.5" width="1" height="6" depth="4" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
+            <a-box position="1 3 2.5" width="1" height="6" depth="4" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
+            <a-box position="0 3 2" width="3" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
+          </a-entity>
+
+          <a-entity id="L2" position="21 0 10">
+            <a-box position="0 3 4" width="3" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
+            <a-box position="-1 3 1.5" width="1" height="6" depth="4" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
+          </a-entity>
+
+          <!-- Cover REAL -->
+          <!-- R2-cover -->
+          <a-entity id="R2-cover" position="9 6.02 10" scale=".98 .001 .98" color="#ccffcc">
+            <a-box position="0 3 0" width="3" height="6" depth="1"></a-box>
+            <a-box position="-1 3 2" width="1" height="6" depth="5"></a-box>
+            <a-box position="1 3 1" width="1" height="6" depth="2"></a-box>
+            <a-box position="0 3 2" width="3" height="6" depth="1"></a-box>
+            <a-box position="0 3 3.1" rotation="0 -45 0" width="3.4" height="6" depth="1"></a-box>
+          </a-entity>
+
+          <!-- E-cover -->
+          <a-entity id="E-cover" position="13 6.02 10" scale=".98 .001 .98" color="#ccffcc">
+            <a-box position="0 3 0" width="2" height="6" depth="1"></a-box>
+            <a-box position="0 3 4" width="2" height="6" depth="1"></a-box>
+            <a-box position="-1 3 2" width="1" height="6" depth="3"></a-box>
+            <a-box position="0.2 3 2" width="1.5" height="6" depth="1"></a-box>
+          </a-entity>
+
+          <!-- A2-cover -->
+          <a-entity id="A2-cover" position="17 6.02 10" scale=".98 .001 .98" color="#ccffcc">
+            <a-box position="0 3 0" width="3" height="6" depth="1"></a-box>
+            <a-box position="-1 3 2.5" width="1" height="6" depth="4"></a-box>
+            <a-box position="1 3 2.5" width="1" height="6" depth="4"></a-box>
+            <a-box position="0 3 2" width="3" height="6" depth="1"></a-box>
+          </a-entity>
+
+          <!-- L2-cover -->
+          <a-entity id="L2-cover" position="21 6.02 10" scale=".98 .001 .98" color="#ccffcc">
+            <a-box position="0 3 4" width="3" height="6" depth="1"></a-box>
+            <a-box position="-1 3 1.5" width="1" height="6" depth="4"></a-box>
+          </a-entity>
         </a-entity>
 
-        <a-entity id="E" position="13 0 10">
-          <a-box position="0 3 0" width="2" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
-          <a-box position="0 3 4" width="2" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
-          <a-box position="-1 3 2" width="1" height="6" depth="3" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
-          <a-box position="0.2 3 2" width="1.5" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
-        </a-entity>
-
-        <a-entity id="A2" position="17 0 10">
-          <a-box position="0 3 0" width="3" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
-          <a-box position="-1 3 2.5" width="1" height="6" depth="4" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
-          <a-box position="1 3 2.5" width="1" height="6" depth="4" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
-          <a-box position="0 3 2" width="3" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
-        </a-entity>
-
-        <a-entity id="L2" position="21 0 10">
-          <a-box position="0 3 4" width="3" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
-          <a-box position="-1 3 1.5" width="1" height="6" depth="4" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
-        </a-entity>
-        </a-entity>
-
+        <!-- TE -->
         <a-entity id="T2" position="5 0 21">
           <a-box position="0 3 -2" width="4" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
           <a-box position="0 3 0" width="1" height="6" depth="5" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
@@ -570,6 +648,23 @@
           <a-box position="0.2 3 2" width="1.5" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
         </a-entity>
 
+        <!-- Cover TE -->
+
+        <!-- T2 cover -->
+        <a-entity id="T2-cover" position="5 6.02 21" scale=".98 .001 .98">
+          <a-box position="0 3 -2" width="4" height="6" depth="1" material="color:#00aae4"></a-box>
+          <a-box position="0 3 0" width="1" height="6" depth="5" material="color:#00aae4"></a-box>
+        </a-entity>
+
+        <!-- E2 cover -->
+        <a-entity id="E2-cover" position="10 6.02 19" scale=".98 .001 .98">
+          <a-box position="0 3 0" width="2" height="6" depth="1" material="color:#00aae4"></a-box>
+          <a-box position="0 3 4" width="2" height="6" depth="1" material="color:#00aae4"></a-box>
+          <a-box position="-1 3 2" width="1" height="6" depth="3" material="color:#00aae4"></a-box>
+          <a-box position="0.2 3 2" width="1.5" height="6" depth="1" material="color:#00aae4"></a-box>
+        </a-entity>
+
+        <!-- DESEO -->
         <a-entity id="DESEO" position="0 0 1">
 
           <a-entity id="D" position="3 0 25">
@@ -615,21 +710,74 @@
             <a-box position="1 3 2" width="1" height="6" depth="3" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
           </a-entity>
 
+          <!-- Cover DESEO -->
+          <a-entity id="D-cover" position="3 6.02 25" scale=".98 .001 .98">
+            <a-box position="-1 3 2.5" width="1" height="6" depth="4" material="color:#00aae4"></a-box>
+            <a-box position="-0.5 3 5" width="2" height="6" depth="1" material="color:#00aae4"></a-box>
+            <a-box position="-0.5 3 0" width="2" height="6" depth="1" material="color:#00aae4"></a-box>
+            <a-box position="1 3 1" width="1" height="6" depth="1" material="color:#00aae4"></a-box>
+            <a-box position="1.5 3 2.5" width="1" height="6" depth="2" material="color:#00aae4"></a-box>
+            <a-box position="1 3 4" width="1" height="6" depth="1" material="color:#00aae4"></a-box>
+          </a-entity>
+
+          <a-entity id="E3-cover" position="6.5 6.02 29" scale=".98 .001 .98">
+            <a-box position="0 3 0" width="2" height="6" depth="1" material="color:#00aae4"></a-box>
+            <a-box position="0 3 4" width="2" height="6" depth="1" material="color:#00aae4"></a-box>
+            <a-box position="-1 3 2" width="1" height="6" depth="3" material="color:#00aae4"></a-box>
+            <a-box position="0.2 3 2" width="1.5" height="6" depth="1" material="color:#00aae4"></a-box>
+          </a-entity>
+
+          <a-entity id="S-cover" position="9.5 6.02 28.5" scale=".98 .001 .98">
+            <a-box position="-0.5 3 1" width="2" height="6" depth="1" material="color:#00aae4"></a-box>
+            <a-box position="1 3 0.5" width="1" height="6" depth="2" material="color:#00aae4"></a-box>
+            <a-box position="0.5 3 -1" width="2" height="6" depth="1" material="color:#00aae4"></a-box>
+            <a-box position="-1 3 -1.5" width="1" height="6" depth="2" material="color:#00aae4"></a-box>
+            <a-box position="0 3 -3" width="3" height="6" depth="1" material="color:#00aae4"></a-box>
+          </a-entity>
+
+          <a-entity id="E4-cover" position="13 6.02 29" scale=".98 .001 .98">
+            <a-box position="0 3 0" width="2" height="6" depth="1" material="color:#00aae4"></a-box>
+            <a-box position="0 3 4" width="2" height="6" depth="1" material="color:#00aae4"></a-box>
+            <a-box position="-1 3 2" width="1" height="6" depth="3" material="color:#00aae4"></a-box>
+            <a-box position="0.2 3 2" width="1.5" height="6" depth="1" material="color:#00aae4"></a-box>
+          </a-entity>
+
+          <a-entity id="O2-cover" position="16 6.02 25.5" scale=".98 .001 .98">
+            <a-box position="0 3 4" width="3" height="6" depth="1" material="color:#00aae4"></a-box>
+            <a-box position="0 3 0" width="3" height="6" depth="1" material="color:#00aae4"></a-box>
+            <a-box position="-1 3 2" width="1" height="6" depth="3" material="color:#00aae4"></a-box>
+            <a-box position="1 3 2" width="1" height="6" depth="3" material="color:#00aae4"></a-box>
+          </a-entity>
+
         </a-entity>
 
+        <!-- LO -->
         <a-entity id="L3" position="26 0 18">
           <a-box position="0 3 4" width="3" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
           <a-box position="-1 3 1.5" width="1" height="6" depth="4" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
         </a-entity>
 
         <a-entity id="O3" position="30 0 18">
-            <a-box position="0 3 4" width="3" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
-            <a-box position="0 3 0" width="3" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
-            <a-box position="-1 3 2" width="1" height="6" depth="3" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
-            <a-box position="1 3 2" width="1" height="6" depth="3" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
-          </a-entity>
+          <a-box position="0 3 4" width="3" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
+          <a-box position="0 3 0" width="3" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
+          <a-box position="-1 3 2" width="1" height="6" depth="3" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
+          <a-box position="1 3 2" width="1" height="6" depth="3" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
+        </a-entity>
 
+        <!-- Cover LO -->
+        <a-entity id="L3-cover" position="26 6.02 18" scale=".98 .001 .98">
+          <a-box position="0 3 4" width="3" height="6" depth="1" material="color:#8256b8"></a-box>
+          <a-box position="-1 3 1.5" width="1" height="6" depth="4" material="color:#8256b8"></a-box>
+        </a-entity>
 
+        <a-entity id="O3-cover" position="30 6.02 18" scale=".98 .001 .98">
+          <a-box position="0 3 4" width="3" height="6" depth="1" material="color:#8256b8"></a-box>
+          <a-box position="0 3 0" width="3" height="6" depth="1" material="color:#8256b8"></a-box>
+          <a-box position="-1 3 2" width="1" height="6" depth="3" material="color:#8256b8"></a-box>
+          <a-box position="1 3 2" width="1" height="6" depth="3" material="color:#8256b8"></a-box>
+        </a-entity>
+
+        <!-- MEJOR -->
         <a-entity id="M" position="21 0 25">
             <a-box position="-1 3 2" width="1" height="6" depth="5" material="src:#seto; color: #ccffcc; repeat: 1;"></a-box>
             <a-box position="0 3 1" width="1" height="6" depth="1" material="src:#seto; color: #ccffcc; repeat: 1;"></a-box>
@@ -667,6 +815,46 @@
           <a-box position="0 3 2" width="3" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
           <a-box position="0 3 3.1" rotation="0 -45 0" width="3.4" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
         </a-entity>
+
+        <!-- Cover MEJOR -->
+        <a-entity id="M-cover" position="21 6.02 25" scale=".98 .001 .98">
+          <a-box position="-1 3 2" width="1" height="6" depth="5" material="color:#8256b8"></a-box>
+          <a-box position="0 3 1" width="1" height="6" depth="1" material="color:#8256b8"></a-box>
+          <a-box position="1 3 2" width="1" height="6" depth="1" material="color:#8256b8"></a-box>
+          <a-entity position="2 0 0" scale="-1 1 1">
+            <a-box position="-1 3 2" width="1" height="6" depth="5" material="color:#8256b8"></a-box>
+            <a-box position="0 3 1" width="1" height="6" depth="1" material="color:#8256b8"></a-box>
+          </a-entity>
+        </a-entity>
+
+        <a-entity id="E5-cover" position="23 6.02 31" scale=".98 .001 .98">
+          <a-box position="0 3 0" width="2" height="6" depth="1" material="color:#8256b8"></a-box>
+          <a-box position="0 3 4" width="2" height="6" depth="1" material="color:#8256b8"></a-box>
+          <a-box position="-1 3 2" width="1" height="6" depth="3" material="color:#8256b8"></a-box>
+          <a-box position="0.2 3 2" width="1.5" height="6" depth="1" material="color:#8256b8"></a-box>
+        </a-entity>
+
+        <a-entity id="J-cover" position="28 6.02 31" scale=".98 .001 .98">
+          <a-box position="-2 3 4" width="3" height="6" depth="1" material="color:#8256b8"></a-box>
+          <a-box position="-3 3 3" width="1" height="6" depth="1" material="color:#8256b8"></a-box>
+          <a-box position="-1 3 1.5" width="1" height="6" depth="4" material="color:#8256b8"></a-box>
+        </a-entity>
+
+        <a-entity id="O4-cover" position="30 6.02 31" scale=".98 .001 .98">
+          <a-box position="0 3 4" width="3" height="6" depth="1" material="color:#8256b8"></a-box>
+          <a-box position="0 3 0" width="3" height="6" depth="1" material="color:#8256b8"></a-box>
+          <a-box position="-1 3 2" width="1" height="6" depth="3" material="color:#8256b8"></a-box>
+          <a-box position="1 3 2" width="1" height="6" depth="3" material="color:#8256b8"></a-box>
+        </a-entity>
+
+        <a-entity id="R3-cover" position="32 6.02 25" scale=".98 .001 .98">
+          <a-box position="0 3 0" width="3" height="6" depth="1" material="color:#8256b8"></a-box>
+          <a-box position="-1 3 2" width="1" height="6" depth="5" material="color:#8256b8"></a-box>
+          <a-box position="1 3 1" width="1" height="6" depth="2" material="color:#8256b8"></a-box>
+          <a-box position="0 3 2" width="3" height="6" depth="1" material="color:#8256b8"></a-box>
+          <a-box position="0 3 3.1" rotation="0 -45 0" width="3.4" height="6" depth="1" material="color:#8256b8"></a-box>
+        </a-entity>
+
 
 
         <!--
@@ -716,7 +904,7 @@
       <!-- Camera -->
       <!-- <a-entity id="rig" movement-controls="speed: 0.025" position="-4 30 35"> -->
       <!--<a-entity id="rig" movement-controls="speed: 0.05" position="0 2 0">-->
-      <a-entity id="rig" movement-controls="speed: 0.15" position="0 2 0">
+      <a-entity id="rig" movement-controls="speed: 0.15" position="0 20 0">
         <a-entity camera look-controls wasd-controls collision-detection position="0 2 0"> </a-entity>
         <!-- CONTROLADORES DE META QUEST -->
         <a-entity
