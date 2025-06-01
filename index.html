@@ -167,19 +167,45 @@
 
 
     <script>
-  AFRAME.registerComponent("key-activates-parterre", {
-    init: function () {
-      const keyEl = this.el;
-      keyEl.addEventListener("ybutton-activated", function () {
-        const parterre = document.querySelector("#parterre");
-        if (parterre) {
-          parterre.setAttribute("visible", false);
-          console.log("Parterre eliminado al usar la llave.");
+      AFRAME.registerComponent("key-activates-parterre", {
+        init: function () {
+          const keyEl = this.el;
+          keyEl.addEventListener("ybutton-activated", function () {
+            const parterre = document.querySelector("#parterre");
+            if (parterre) {
+              parterre.setAttribute("visible", false);
+              console.log("Parterre eliminado al usar la llave.");
+            }
+          });
         }
       });
-    }
-  });
-</script>
+  </script>
+
+  <script>
+    AFRAME.registerComponent('white-material', {
+      init: function () {
+        this.el.addEventListener('model-loaded', () => {
+          const mesh = this.el.getObject3D('mesh');
+          if (!mesh) { return; }
+          mesh.traverse((node) => {
+            if (node.isMesh) {
+              node.material.color.set('white'); // Cambia el color
+              node.material.metalness = 0; // Opcional: para quitar el brillo metálico
+              node.material.roughness = 1; // Opcional: para hacer el blanco mate
+              node.material.map = null; // Elimina textura difusa
+              node.material.needsUpdate = true; // Obligatorio después de cambiar material
+            }
+          });
+        });
+      }
+    });
+
+    // Aplica el componente a tu modelo
+    document.querySelectorAll('.selectable').forEach(el => {
+      el.setAttribute('white-material', '');
+    });
+
+  </script>
 
 
 
@@ -285,9 +311,9 @@
         animation-mixer="clip: triceratopsLowPolyv11_LODs; loop: repeat; timeScale: 1"
         triceratops-anim
         sound="src: url(https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/rugido.mp3?v=1748370827985); positional: true; volume: 1.0"
-        position="2 0 -3"
+        position="-7 0 0"
         scale="0.02 0.02 0.02"
-        rotation="0 90 0">
+        rotation="0 0 0">
       </a-entity>
 
       <a-entity
@@ -295,9 +321,9 @@
         class="selectable"
         gltf-model="#trex"
         animation-mixer="clip: Animation; loop: repeat; timeScale: 1.5; crossFadeDuration: 0.2"
-        position="-16 0 4"
+        position="-16 0 -8"
         scale="0.8 0.8 0.8"
-        rotation="0 90 0">
+        rotation="0 150 0">
       </a-entity>
 
       <a-entity
@@ -305,9 +331,9 @@
         class="selectable"
         gltf-model="#stego"
         animation-mixer="clip: Idle; loop: repeat; timeScale: 1;"
-        position="-8 0 4"
-        scale="3 3 3"
-        rotation="0 0 0"
+        position="8.5 0 12"
+        scale="2 2 2"
+        rotation="0 40 0"
         stego-anim>
       </a-entity>
 
@@ -356,7 +382,7 @@
       </a-entity>
       -->
 
-      <a-entity id="deer-obj" class="selectable" gltf-model="#deer" position="2 3 -3" scale="1 1 1" rotation="0 90 0">
+      <a-entity id="deer-obj" class="selectable" gltf-model="#deer" position="-6 0 -8" scale="2 2 2" rotation="0 90 0" white-material>
       </a-entity>
 
       <!-- Botón TP -->
@@ -439,18 +465,18 @@
         <a-box static-body position="0 3 18" width="1" height="6" depth="35" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
         <a-box position="35 3 18" width="1" height="6" depth="35" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
 
-        <a-box position="7 3 36" width="15" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
+        <a-box position="7 3 36" width="17" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
         <a-box position="28 3 36" width="15" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
 
         <a-entity
         geometry="primitive: torus;
-                  radius: 1.3;
+                  radius: 1.2;
                   radiusTubular: 0.1;
                   arc: 180;
                   segmentsRadial: 36;
                   segmentsTubular: 12"
         material="src:#seto;color: #ccffcc; repeat: 2 ;"
-        position="17.5 6 36"
+        position="18 6 36"
         rotation="0 0 0"
         scale= "2.6 2 2">
       </a-entity>
@@ -676,14 +702,14 @@
             <a-box position="1 3 4" width="1" height="6" depth="1" material="src:#seto; color: #ccffcc; repeat: 1;"></a-box>
           </a-entity>
 
-          <a-entity id="E3" position="6.5 0 29">
+          <a-entity id="E3" position="7 0 29">
             <a-box position="0 3 0" width="2" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
             <a-box position="0 3 4" width="2" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
             <a-box position="-1 3 2" width="1" height="6" depth="3" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
             <a-box position="0.2 3 2" width="1.5" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
           </a-entity>
 
-          <a-entity id="S" position="9.5 0 28.5">
+          <a-entity id="S" position="10.5 0 28.5">
             <!-- Parte superior de la S -->
             <a-box position="-0.5 3 1" width="2" height="6" depth="1" material="src:#seto; color: #ccffcc; repeat: 1;"></a-box>
             <!-- Lado izquierdo superior -->
@@ -696,14 +722,14 @@
             <a-box position="0 3 -3" width="3" height="6" depth="1" material="src:#seto; color: #ccffcc; repeat: 1;"></a-box>
           </a-entity>
 
-          <a-entity id="E4" position="13 0 29">
+          <a-entity id="E4" position="14.5 0 29">
             <a-box position="0 3 0" width="2" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
             <a-box position="0 3 4" width="2" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
             <a-box position="-1 3 2" width="1" height="6" depth="3" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
             <a-box position="0.2 3 2" width="1.5" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
           </a-entity>
 
-          <a-entity id="O2" position="16 0 25.5">
+          <a-entity id="O2" position="18 0 25.5">
             <a-box position="0 3 4" width="3" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
             <a-box position="0 3 0" width="3" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
             <a-box position="-1 3 2" width="1" height="6" depth="3" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
@@ -720,14 +746,14 @@
             <a-box position="1 3 4" width="1" height="6" depth="1" material="color:#00aae4"></a-box>
           </a-entity>
 
-          <a-entity id="E3-cover" position="6.5 6.02 29" scale=".98 .001 .98">
+          <a-entity id="E3-cover" position="7 6.02 29" scale=".98 .001 .98">
             <a-box position="0 3 0" width="2" height="6" depth="1" material="color:#00aae4"></a-box>
             <a-box position="0 3 4" width="2" height="6" depth="1" material="color:#00aae4"></a-box>
             <a-box position="-1 3 2" width="1" height="6" depth="3" material="color:#00aae4"></a-box>
             <a-box position="0.2 3 2" width="1.5" height="6" depth="1" material="color:#00aae4"></a-box>
           </a-entity>
 
-          <a-entity id="S-cover" position="9.5 6.02 28.5" scale=".98 .001 .98">
+          <a-entity id="S-cover" position="10.5 6.02 28.5" scale=".98 .001 .98">
             <a-box position="-0.5 3 1" width="2" height="6" depth="1" material="color:#00aae4"></a-box>
             <a-box position="1 3 0.5" width="1" height="6" depth="2" material="color:#00aae4"></a-box>
             <a-box position="0.5 3 -1" width="2" height="6" depth="1" material="color:#00aae4"></a-box>
@@ -735,14 +761,14 @@
             <a-box position="0 3 -3" width="3" height="6" depth="1" material="color:#00aae4"></a-box>
           </a-entity>
 
-          <a-entity id="E4-cover" position="13 6.02 29" scale=".98 .001 .98">
+          <a-entity id="E4-cover" position="14.5 6.02 29" scale=".98 .001 .98">
             <a-box position="0 3 0" width="2" height="6" depth="1" material="color:#00aae4"></a-box>
             <a-box position="0 3 4" width="2" height="6" depth="1" material="color:#00aae4"></a-box>
             <a-box position="-1 3 2" width="1" height="6" depth="3" material="color:#00aae4"></a-box>
             <a-box position="0.2 3 2" width="1.5" height="6" depth="1" material="color:#00aae4"></a-box>
           </a-entity>
 
-          <a-entity id="O2-cover" position="16 6.02 25.5" scale=".98 .001 .98">
+          <a-entity id="O2-cover" position="18 6.02 25.5" scale=".98 .001 .98">
             <a-box position="0 3 4" width="3" height="6" depth="1" material="color:#00aae4"></a-box>
             <a-box position="0 3 0" width="3" height="6" depth="1" material="color:#00aae4"></a-box>
             <a-box position="-1 3 2" width="1" height="6" depth="3" material="color:#00aae4"></a-box>
@@ -778,7 +804,7 @@
         </a-entity>
 
         <!-- MEJOR -->
-        <a-entity id="M" position="21 0 25">
+        <a-entity id="M" position="22 0 31">
             <a-box position="-1 3 2" width="1" height="6" depth="5" material="src:#seto; color: #ccffcc; repeat: 1;"></a-box>
             <a-box position="0 3 1" width="1" height="6" depth="1" material="src:#seto; color: #ccffcc; repeat: 1;"></a-box>
             <a-box position="1 3 2" width="1" height="6" depth="1" material="src:#seto; color: #ccffcc; repeat: 1;"></a-box>
@@ -788,27 +814,27 @@
             </a-entity>
         </a-entity>
 
-        <a-entity id="E5" position="23 0 31">
+        <a-entity id="E5" position="23 0 25">
             <a-box position="0 3 0" width="2" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
             <a-box position="0 3 4" width="2" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
             <a-box position="-1 3 2" width="1" height="6" depth="3" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
             <a-box position="0.2 3 2" width="1.5" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
           </a-entity>
 
-        <a-entity id="J" position="28 0 31">
+        <a-entity id="J" position="29 0 25">
           <a-box position="-2 3 4" width="3" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
           <a-box position="-3 3 3" width="1" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
           <a-box position="-1 3 1.5" width="1" height="6" depth="4" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
         </a-entity>
 
-        <a-entity id="O4" position="30 0 31">
+        <a-entity id="O4" position="31 0 25">
             <a-box position="0 3 4" width="3" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
             <a-box position="0 3 0" width="3" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
             <a-box position="-1 3 2" width="1" height="6" depth="3" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
             <a-box position="1 3 2" width="1" height="6" depth="3" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
           </a-entity>
 
-        <a-entity id="R3" position="32 0 25">
+        <a-entity id="R3" position="32 0 31">
           <a-box position="0 3 0" width="3" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
           <a-box position="-1 3 2" width="1" height="6" depth="5" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
           <a-box position="1 3 1" width="1" height="6" depth="2" material="src:#seto;color: #ccffcc; repeat: 1 ;"></a-box>
@@ -817,7 +843,7 @@
         </a-entity>
 
         <!-- Cover MEJOR -->
-        <a-entity id="M-cover" position="21 6.02 25" scale=".98 .001 .98">
+        <a-entity id="M-cover" position="22 6.02 31" scale=".98 .001 .98">
           <a-box position="-1 3 2" width="1" height="6" depth="5" material="color:#8256b8"></a-box>
           <a-box position="0 3 1" width="1" height="6" depth="1" material="color:#8256b8"></a-box>
           <a-box position="1 3 2" width="1" height="6" depth="1" material="color:#8256b8"></a-box>
@@ -827,27 +853,27 @@
           </a-entity>
         </a-entity>
 
-        <a-entity id="E5-cover" position="23 6.02 31" scale=".98 .001 .98">
+        <a-entity id="E5-cover" position="23 6.02 25" scale=".98 .001 .98">
           <a-box position="0 3 0" width="2" height="6" depth="1" material="color:#8256b8"></a-box>
           <a-box position="0 3 4" width="2" height="6" depth="1" material="color:#8256b8"></a-box>
           <a-box position="-1 3 2" width="1" height="6" depth="3" material="color:#8256b8"></a-box>
           <a-box position="0.2 3 2" width="1.5" height="6" depth="1" material="color:#8256b8"></a-box>
         </a-entity>
 
-        <a-entity id="J-cover" position="28 6.02 31" scale=".98 .001 .98">
+        <a-entity id="J-cover" position="29 6.02 25" scale=".98 .001 .98">
           <a-box position="-2 3 4" width="3" height="6" depth="1" material="color:#8256b8"></a-box>
           <a-box position="-3 3 3" width="1" height="6" depth="1" material="color:#8256b8"></a-box>
           <a-box position="-1 3 1.5" width="1" height="6" depth="4" material="color:#8256b8"></a-box>
         </a-entity>
 
-        <a-entity id="O4-cover" position="30 6.02 31" scale=".98 .001 .98">
+        <a-entity id="O4-cover" position="31 6.02 25" scale=".98 .001 .98">
           <a-box position="0 3 4" width="3" height="6" depth="1" material="color:#8256b8"></a-box>
           <a-box position="0 3 0" width="3" height="6" depth="1" material="color:#8256b8"></a-box>
           <a-box position="-1 3 2" width="1" height="6" depth="3" material="color:#8256b8"></a-box>
           <a-box position="1 3 2" width="1" height="6" depth="3" material="color:#8256b8"></a-box>
         </a-entity>
 
-        <a-entity id="R3-cover" position="32 6.02 25" scale=".98 .001 .98">
+        <a-entity id="R3-cover" position="32 6.02 31" scale=".98 .001 .98">
           <a-box position="0 3 0" width="3" height="6" depth="1" material="color:#8256b8"></a-box>
           <a-box position="-1 3 2" width="1" height="6" depth="5" material="color:#8256b8"></a-box>
           <a-box position="1 3 1" width="1" height="6" depth="2" material="color:#8256b8"></a-box>
@@ -902,9 +928,9 @@
 
 
       <!-- Camera -->
-      <!-- <a-entity id="rig" movement-controls="speed: 0.025" position="-4 30 35"> -->
+       <a-entity id="rig" movement-controls="speed: 0.025" position="-2 1.5 35">
       <!--<a-entity id="rig" movement-controls="speed: 0.05" position="0 2 0">-->
-      <a-entity id="rig" movement-controls="speed: 0.15" position="0 20 0">
+      <!--<a-entity id="rig" movement-controls="speed: 0.15" position="0 2 0">-->
         <a-entity camera look-controls wasd-controls collision-detection position="0 2 0"> </a-entity>
         <!-- CONTROLADORES DE META QUEST -->
         <a-entity
