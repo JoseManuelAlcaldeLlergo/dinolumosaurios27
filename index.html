@@ -6,47 +6,6 @@
     <script src="./aframe-extras.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.5.0/dist/aframe-environment-component.min.js"></script>
 
-    <script>
-AFRAME.registerComponent('vignette-control', {
-  schema: {
-    innerRadius: {type: 'number', default: 0.3},  // tamaño del agujero central
-    outerRadius: {type: 'number', default: 1},    // tamaño máximo
-    maxOpacity: {type: 'number', default: 0.6},   // opacidad máxima
-    speedThreshold: {type: 'number', default: 0.01}
-  },
-  init: function () {
-    const sceneEl = this.el.sceneEl;
-
-    // Crear una geometría de anillo (ring)
-    const vignette = document.createElement('a-ring');
-    vignette.setAttribute('radius-inner', this.data.innerRadius);
-    vignette.setAttribute('radius-outer', this.data.outerRadius);
-    vignette.setAttribute('rotation', '-90 0 0');
-    vignette.setAttribute('material', {
-      color: 'black',
-      shader: 'flat',
-      transparent: true,
-      opacity: 0,
-      side: 'double'
-    });
-
-    // Pegarlo a la cámara
-    sceneEl.camera.el.appendChild(vignette);
-    this.vignette = vignette;
-  },
-  tick: function (time, delta) {
-    if (!this.el.components['movement-controls']) { return; }
-    const velocity = this.el.components['movement-controls'].velocity;
-    const speed = Math.sqrt(velocity.x * velocity.x + velocity.z * velocity.z);
-    const targetOpacity = speed > this.data.speedThreshold ? this.data.maxOpacity : 0;
-
-    const material = this.vignette.getObject3D('mesh').material;
-    if (!material) return;
-    material.opacity += (targetOpacity - material.opacity) * 0.1; // Interpolación suave
-  }
-});
-</script>
-
 
     <script>
       AFRAME.registerComponent("raycaster-click-emitter", {
@@ -318,7 +277,7 @@ AFRAME.registerComponent('vignette-control', {
 
         <img id="sanson" src="sanson.jpeg" />
         <img id="cesped" src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/1601.m10.i311.n029.S.c10.164511620%20Seamless%20green%20grass%20vector%20pattern.jpg?v=1747477475492" />
-        <img id="seto" src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/view-evergreen-boxwood-shrubs2.jpg?v=1747761539360" />
+        <img id="seto" src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/ScatteredLeaves008_1K-JPG_Color.jpg?v=1748788362784" />
       </a-assets>
 
       <a-entity sound="src: url(https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/ambienteAC.mp3?v=1748370245617); autoplay: true; loop: true; volume: 0.5"></a-entity>
@@ -503,12 +462,12 @@ AFRAME.registerComponent('vignette-control', {
         <!--<a-box position="15 0.5 15" width="5" height="1" depth="5" color="#FFC65D"></a-box>-->
 
         <!-- Muros exteriores -->
-        <a-box position="17 3 0" width="35" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
-        <a-box static-body position="0 3 18" width="1" height="6" depth="35" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
-        <a-box position="35 3 18" width="1" height="6" depth="35" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
+        <a-box position="17 3 0" width="35" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 2 2 ;"></a-box>
+        <a-box static-body position="0 3 18" width="1" height="6" depth="35" material="src:#seto;color: #ccffcc; repeat: 4 4 ;"></a-box>
+        <a-box position="35 3 18" width="1" height="6" depth="35" material="src:#seto;color: #ccffcc; repeat: 14 4; wrap: repeat"></a-box>
 
-        <a-box position="7 3 36" width="17" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 2 1;"></a-box>
-        <a-box position="28 3 36" width="15" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 2;"></a-box>
+        <a-box position="7 3 36" width="17" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 4 3;"></a-box>
+        <a-box position="28 3 36" width="15" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 5 5; wrap: clampToEdge; side:double"></a-box>
 
         <a-entity
         geometry="primitive: torus;
@@ -517,7 +476,7 @@ AFRAME.registerComponent('vignette-control', {
                   arc: 180;
                   segmentsRadial: 36;
                   segmentsTubular: 12"
-        material="src:#seto;color: #ccffcc; repeat: 2 ;"
+        material="src:#seto;color: #ccffcc; repeat: 3 ;"
         position="18 6 36"
         rotation="0 0 0"
         scale= "2.6 2 2">
