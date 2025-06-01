@@ -7,40 +7,46 @@
     <script src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.5.0/dist/aframe-environment-component.min.js"></script>
 
     <script>
-      AFRAME.registerComponent('vignette-control', {
-        schema: {
-          radius: {type: 'number', default: 0.6},
-          intensity: {type: 'number', default: 0.8},
-          speedThreshold: {type: 'number', default: 0.01}
-        },
-        init: function () {
-          const sceneEl = this.el.sceneEl;
-          const vignette = document.createElement('a-entity');
-          vignette.setAttribute('geometry', {
-            primitive: 'sphere',
-            radius: 1,
-            segmentsWidth: 64,
-            segmentsHeight: 64
-          });
-          vignette.setAttribute('material', {
-            shader: 'flat',
-            color: 'black',
-            side: 'back',
-            opacity: 0
-          });
-          vignette.setAttribute('scale', '1 1 -1');
-          sceneEl.camera.el.appendChild(vignette);
-          this.vignette = vignette;
-        },
-        tick: function (time, delta) {
-          const velocity = this.el.getAttribute('movement-controls').velocity;
-          const speed = Math.sqrt(velocity.x * velocity.x + velocity.z * velocity.z);
-          const targetOpacity = speed > this.data.speedThreshold ? this.data.intensity : 0;
-          const material = this.vignette.getObject3D('mesh').material;
-          material.opacity += (targetOpacity - material.opacity) * 0.1; // suavizado
-        }
-      });
-      </script>
+AFRAME.registerComponent('vignette-control', {
+  schema: {
+    innerRadius: {type: 'number', default: 0.3},  // tamaño del agujero central
+    outerRadius: {type: 'number', default: 1},    // tamaño máximo
+    maxOpacity: {type: 'number', default: 0.6},   // opacidad máxima
+    speedThreshold: {type: 'number', default: 0.01}
+  },
+  init: function () {
+    const sceneEl = this.el.sceneEl;
+
+    // Crear una geometría de anillo (ring)
+    const vignette = document.createElement('a-ring');
+    vignette.setAttribute('radius-inner', this.data.innerRadius);
+    vignette.setAttribute('radius-outer', this.data.outerRadius);
+    vignette.setAttribute('rotation', '-90 0 0');
+    vignette.setAttribute('material', {
+      color: 'black',
+      shader: 'flat',
+      transparent: true,
+      opacity: 0,
+      side: 'double'
+    });
+
+    // Pegarlo a la cámara
+    sceneEl.camera.el.appendChild(vignette);
+    this.vignette = vignette;
+  },
+  tick: function (time, delta) {
+    if (!this.el.components['movement-controls']) { return; }
+    const velocity = this.el.components['movement-controls'].velocity;
+    const speed = Math.sqrt(velocity.x * velocity.x + velocity.z * velocity.z);
+    const targetOpacity = speed > this.data.speedThreshold ? this.data.maxOpacity : 0;
+
+    const material = this.vignette.getObject3D('mesh').material;
+    if (!material) return;
+    material.opacity += (targetOpacity - material.opacity) * 0.1; // Interpolación suave
+  }
+});
+</script>
+
 
     <script>
       AFRAME.registerComponent("raycaster-click-emitter", {
