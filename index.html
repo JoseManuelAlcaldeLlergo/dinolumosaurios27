@@ -5,8 +5,50 @@
     <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
     <script src="./aframe-extras.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.5.0/dist/aframe-environment-component.min.js"></script>
-    <!-- COMPONENTE DE ANIMACION AL CLIC -->
-  <script>
+
+    <script id="vignetteShader" type="x-shader/x-fragment">
+      precision mediump float;
+      uniform sampler2D src;
+      uniform float intensity;
+      varying vec2 vUV;
+      void main() {
+        vec2 uv = vUV;
+        float dist = distance(uv, vec2(0.5, 0.5));
+        float vignette = smoothstep(0.5, 0.8, dist);
+        gl_FragColor = texture2D(src, uv);
+        gl_FragColor.rgb *= 1.0 - vignette * intensity;
+      }
+    </script>
+
+    <a-entity id="vignette" geometry="primitive: plane; height: 2; width: 2"
+              material="shader: flat; src: #vignetteShader; transparent: true"
+              position="0 0 -1"
+              scale="1 1 1"
+              visible="false">
+    </a-entity>
+
+    <script>
+      AFRAME.registerComponent('vignette-control', {
+        schema: {
+          intensity: {type: 'number', default: 0.5}
+        },
+        init: function () {
+          this.vignette = document.querySelector('#vignette');
+          this.camera = document.querySelector('[camera]');
+          this.velocity = new THREE.Vector3();
+        },
+        tick: function (time, timeDelta) {
+          const rig = this.el.sceneEl.camera.el;
+          if (rig.is('moving')) {
+            this.vignette.setAttribute('visible', true);
+          } else {
+            this.vignette.setAttribute('visible', false);
+          }
+        }
+      });
+    </script>
+
+    <script>
       AFRAME.registerComponent("raycaster-click-emitter", {
         init: function () {
           const controllerEl = this.el;
@@ -928,7 +970,7 @@
 
 
       <!-- Camera -->
-       <a-entity id="rig" movement-controls="speed: 0.15" position="-2 1.5 35">
+       <a-entity id="rig" vignette-control movement-controls="speed: 0.15" position="-2 1.5 35">
       <!--<a-entity id="rig" movement-controls="speed: 0.05" position="0 2 0">-->
       <!--<a-entity id="rig" movement-controls="speed: 0.15" position="0 2 0">-->
         <a-entity camera look-controls wasd-controls collision-detection position="0 2 0"> </a-entity>
