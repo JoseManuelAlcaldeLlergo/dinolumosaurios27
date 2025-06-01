@@ -6,47 +6,41 @@
     <script src="./aframe-extras.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.5.0/dist/aframe-environment-component.min.js"></script>
 
-    <script id="vignetteShader" type="x-shader/x-fragment">
-      precision mediump float;
-      uniform sampler2D src;
-      uniform float intensity;
-      varying vec2 vUV;
-      void main() {
-        vec2 uv = vUV;
-        float dist = distance(uv, vec2(0.5, 0.5));
-        float vignette = smoothstep(0.5, 0.8, dist);
-        gl_FragColor = texture2D(src, uv);
-        gl_FragColor.rgb *= 1.0 - vignette * intensity;
-      }
-    </script>
-
-    <a-entity id="vignette" geometry="primitive: plane; height: 2; width: 2"
-              material="shader: flat; src: #vignetteShader; transparent: true"
-              position="0 0 -1"
-              scale="1 1 1"
-              visible="false">
-    </a-entity>
-
     <script>
       AFRAME.registerComponent('vignette-control', {
         schema: {
-          intensity: {type: 'number', default: 0.5}
+          radius: {type: 'number', default: 0.6},
+          intensity: {type: 'number', default: 0.8},
+          speedThreshold: {type: 'number', default: 0.01}
         },
         init: function () {
-          this.vignette = document.querySelector('#vignette');
-          this.camera = document.querySelector('[camera]');
-          this.velocity = new THREE.Vector3();
+          const sceneEl = this.el.sceneEl;
+          const vignette = document.createElement('a-entity');
+          vignette.setAttribute('geometry', {
+            primitive: 'sphere',
+            radius: 1,
+            segmentsWidth: 64,
+            segmentsHeight: 64
+          });
+          vignette.setAttribute('material', {
+            shader: 'flat',
+            color: 'black',
+            side: 'back',
+            opacity: 0
+          });
+          vignette.setAttribute('scale', '1 1 -1');
+          sceneEl.camera.el.appendChild(vignette);
+          this.vignette = vignette;
         },
-        tick: function (time, timeDelta) {
-          const rig = this.el.sceneEl.camera.el;
-          if (rig.is('moving')) {
-            this.vignette.setAttribute('visible', true);
-          } else {
-            this.vignette.setAttribute('visible', false);
-          }
+        tick: function (time, delta) {
+          const velocity = this.el.getAttribute('movement-controls').velocity;
+          const speed = Math.sqrt(velocity.x * velocity.x + velocity.z * velocity.z);
+          const targetOpacity = speed > this.data.speedThreshold ? this.data.intensity : 0;
+          const material = this.vignette.getObject3D('mesh').material;
+          material.opacity += (targetOpacity - material.opacity) * 0.1; // suavizado
         }
       });
-    </script>
+      </script>
 
     <script>
       AFRAME.registerComponent("raycaster-click-emitter", {
@@ -507,8 +501,8 @@
         <a-box static-body position="0 3 18" width="1" height="6" depth="35" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
         <a-box position="35 3 18" width="1" height="6" depth="35" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
 
-        <a-box position="7 3 36" width="17" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
-        <a-box position="28 3 36" width="15" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 2 ;"></a-box>
+        <a-box position="7 3 36" width="17" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 2 1;"></a-box>
+        <a-box position="28 3 36" width="15" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 1 2;"></a-box>
 
         <a-entity
         geometry="primitive: torus;
