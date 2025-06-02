@@ -59,6 +59,42 @@
     </script>
 
     <script>
+      AFRAME.registerComponent("switch-anim", {
+        schema: {
+          originalClip: { type: "string", default: "Idle" },
+          triggeredClip: { type: "string", required: true }
+        },
+        init: function () {
+          const el = this.el;
+          const originalClip = this.data.originalClip;
+          const triggeredClip = this.data.triggeredClip;
+
+          const triggerHandler = () => {
+            el.setAttribute("animation-mixer", {
+              clip: triggeredClip,
+              loop: "once",
+              timeScale: 1
+            });
+
+            const restoreHandler = () => {
+              el.setAttribute("animation-mixer", {
+                clip: originalClip,
+                loop: "repeat",
+                timeScale: 1
+              });
+              el.removeEventListener("animation-finished", restoreHandler);
+            };
+
+            el.addEventListener("animation-finished", restoreHandler);
+          };
+
+          el.addEventListener("trigger-activated", triggerHandler);
+        }
+      });
+    </script>
+
+
+    <script>
       AFRAME.registerComponent("triceratops-anim", {
         init: function () {
           const el = this.el;
@@ -252,7 +288,7 @@
           response-type="arraybuffer"></a-asset-item>
         <a-asset-item
           id="trex"
-          src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/looping_animation_of_t-_rex_dinosaur_model.glb?v=1747757483145"
+          src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/myTrex.glb?v=1748877662887"
           response-type="arraybuffer"></a-asset-item>
         <!--
         <a-asset-item
@@ -267,6 +303,10 @@
         <a-asset-item
           id="stego"
           src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/overpowered_stegosaurus.glb?v=1748511516291"
+          response-type="arraybuffer"></a-asset-item>
+        <a-asset-item
+          id="boton"
+          src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/low_poly_emergency_button.glb?v=1748878553875"
           response-type="arraybuffer"></a-asset-item>
         <!--
         <a-asset-item
@@ -310,10 +350,10 @@
         class="selectable"
         gltf-model="#triceratops"
         animation-mixer="clip: triceratopsLowPolyv11_LODs; loop: repeat; timeScale: 1"
-        triceratops-anim
+        switch-anim="originalClip:triceratopsLowPolyv11_LODs; triggeredClip:@IdleBreak"
         sound="src: url(https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/rugido.mp3?v=1748370827985); positional: true; volume: 1.0"
-        position="-7 0 0"
-        scale="0.02 0.02 0.02"
+        position="-7.5 0 0"
+        scale="0.03 0.03 0.03"
         rotation="0 0 0">
       </a-entity>
 
@@ -321,10 +361,10 @@
         id="trex-obj"
         class="selectable"
         gltf-model="#trex"
-        animation-mixer="clip: Animation; loop: repeat; timeScale: 1.5; crossFadeDuration: 0.2"
-        position="-16 0 -8"
+        animation-mixer="clip: Idle; loop: repeat; timeScale: 2; crossFadeDuration: 0.2"
+        position="-13 0 -14"
         scale="0.8 0.8 0.8"
-        rotation="0 150 0">
+        rotation="0 -15 0">
       </a-entity>
 
       <a-entity
@@ -332,7 +372,7 @@
         class="selectable"
         gltf-model="#stego"
         animation-mixer="clip: Idle; loop: repeat; timeScale: 1;"
-        position="8.5 0 12"
+        position="8.5 0 13"
         scale="2 2 2"
         rotation="0 40 0"
         stego-anim>
@@ -402,6 +442,7 @@
           position="0 0 0.06">
         </a-text>
 
+        <!--
         <a-box
         id="elevate-button"
         class="selectable"
@@ -411,11 +452,23 @@
         depth="0.5"
         color="green"
         elevate-camera>
-      </a-box>
+        </a-box>
+        -->
+
+        <a-entity
+          id="boton-obj"
+          class="selectable"
+          gltf-model="#boton"
+          position="0 0 0"
+          scale="0.3 0.3 0.3"
+          rotation="0 270 0"
+          elevate-camera>
+        </a-entity>
+
       </a-entity>
 
 
-      <a-entity id="parterre" class="selectable" position="-2.5 -0.2 -3" >
+      <a-entity id="parterre" class="selectable" position="-2 -0.2 0" >
         <!-- Base enorme del parterre -->
           <a-box
             width="8"
@@ -940,41 +993,10 @@
         -->
       </a-entity>
 
-      <a-entity id="sky-gallery" position="0 30 0">
-  <!-- Suelo del pasillo -->
-  <a-box
-    position="0 0 0"
-    width="10"
-    height="0.2"
-    depth="4"
-    color="#999999"
-    material="src: #seto; repeat: 6 50 1; roughness: 1; metalness: 0">
-  </a-box>
-
-  <!-- Pared izquierda -->
-  <a-box
-    position="-5 2 0"
-    width="0.1"
-    height="4"
-    depth="4"
-    color="#ffffff"
-    material="src: #sanson; repeat: 6 5 1; side: double; roughness: 1">
-  </a-box>
-
-  <!-- Pared derecha -->
-  <a-box
-    position="5 2 0"
-    width="0.1"
-    height="4"
-    depth="4"
-    color="#ffffff"
-    material="src: #sanson; repeat: 6 5 1; side: double; roughness: 1">
-  </a-box>
-</a-entity>
 
 
       <!-- Camera -->
-       <a-entity id="rig" vignette-control movement-controls="speed: 0.15" position="-2 20 35">
+       <a-entity id="rig" vignette-control movement-controls="speed: 0.15" position="-2 2 35">
       <!--<a-entity id="rig" movement-controls="speed: 0.05" position="0 2 0">-->
       <!--<a-entity id="rig" movement-controls="speed: 0.15" position="0 2 0">-->
         <a-entity camera look-controls wasd-controls collision-detection position="0 2 0"> </a-entity>
