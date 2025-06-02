@@ -193,19 +193,26 @@
 
     <script>
       AFRAME.registerComponent("elevate-camera", {
+        schema: {
+          delay: { type: "number", default: 3000 } // Delay en milisegundos (default: 3 segundos)
+        },
         init: function () {
           const el = this.el;
+          const delay = this.data.delay;
+
           el.addEventListener("abutton-activated", () => {
-            const rig = document.querySelector("#rig");
-            if (rig) {
-              const pos = rig.getAttribute("position");
-              rig.setAttribute("position", {
-                x: pos.x,
-                y: pos.y + 15,
-                z: pos.z
-              });
-              console.log("Cámara elevada +15");
-            }
+            setTimeout(() => {
+              const rig = document.querySelector("#rig");
+              if (rig) {
+                const pos = rig.getAttribute("position");
+                rig.setAttribute("position", {
+                  x: pos.x,
+                  y: pos.y + 15,
+                  z: pos.z
+                });
+                console.log("Cámara elevada +15 después de " + delay + "ms");
+              }
+            }, delay); // Aquí establecemos el tiempo de espera
           });
         }
       });
@@ -472,7 +479,8 @@
           position="0 0 0"
           scale="0.3 0.3 0.3"
           rotation="0 270 0"
-          elevate-camera>
+          elevate-camera
+          switch-anim="originalClip:Static Pose; triggeredClip:Animation">
         </a-entity>
 
       </a-entity>
