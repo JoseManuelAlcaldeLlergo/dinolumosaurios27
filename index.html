@@ -266,6 +266,9 @@
 
   <body>
     <a-scene vr-mode-ui="enabled: true" xrweb="ar: true" environment="preset: forest; ground: none">
+      <!-- Luz ambiental (suave en toda la escena) -->
+  <a-light type="ambient" color="#888"></a-light>
+
       <!-- MODELOS -->
       <a-assets timeout="10000">
         <a-asset-item id="chair-obj" src="./silla.obj"></a-asset-item>
@@ -296,7 +299,7 @@
           response-type="arraybuffer"></a-asset-item>
         <a-asset-item
           id="key"
-          src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/poppy_playtime__poppy_key.glb?v=1747476042352"
+          src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/poppy-playtime-poppy-key.glb?v=1748882675323"
           response-type="arraybuffer"></a-asset-item>
         <a-asset-item
           id="triceratops"
@@ -397,12 +400,23 @@
       </a-entity>
 
       <a-entity
+        id="diplo-bebe-obj"
+        class="selectable"
+        gltf-model="#diplo-bebe"
+        animation-mixer="clip: Idle; loop: repeat; timeScale: 1.5; crossFadeDuration: 0.2"
+        switch-anim="originalClip:Idle; triggeredClip:LookAround"
+        position="19 0 1"
+        scale="2.1 2.1 2.1"
+        rotation="0 270 0">
+      </a-entity>
+
+      <a-entity
         id="key-obj"
         class="selectable"
         gltf-model="#key"
-        position="-11 2 -1"
+        position="22.5 3 1"
         scale="2 2 2"
-        rotation="270 0 0"
+        rotation="270 279 0"
                 key-activates-parterre>
       </a-entity>
 
@@ -418,16 +432,7 @@
       </a-entity>
       -->
 
-      <a-entity
-        id="diplo-bebe-obj"
-        class="selectable"
-        gltf-model="#diplo-bebe"
-        animation-mixer="clip: Idle; loop: repeat; timeScale: 1.5; crossFadeDuration: 0.2"
-        switch-anim="originalClip:Idle; triggeredClip:LookAround"
-        position="23 0 1"
-        scale="2 2 2"
-        rotation="0 270 0">
-      </a-entity>
+
       <!--
       <a-entity
         id="diplo-space-obj"
