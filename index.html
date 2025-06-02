@@ -62,14 +62,22 @@
       AFRAME.registerComponent("switch-anim", {
         schema: {
           originalClip: { type: "string", default: "Idle" },
-          triggeredClip: { type: "string", required: true }
+          triggeredClip: { type: "string", required: true },
+          soundEnabled: { type: "boolean", default: true }
         },
         init: function () {
           const el = this.el;
           const originalClip = this.data.originalClip;
           const triggeredClip = this.data.triggeredClip;
+          const soundEnabled = this.data.soundEnabled;
 
           const triggerHandler = () => {
+            // Si el sonido está habilitado y hay un componente sound
+            if (soundEnabled && el.components.sound) {
+              el.components.sound.playSound();
+            }
+
+            // Cambiar animación
             el.setAttribute("animation-mixer", {
               clip: triggeredClip,
               loop: "once",
@@ -92,6 +100,7 @@
         }
       });
     </script>
+
 
 
     <script>
@@ -362,6 +371,7 @@
         class="selectable"
         gltf-model="#trex"
         animation-mixer="clip: Idle; loop: repeat; timeScale: 2; crossFadeDuration: 0.2"
+        switch-anim="originalClip:Idle; triggeredClip:Attack"
         position="-13 0 -14"
         scale="0.8 0.8 0.8"
         rotation="0 -15 0">
@@ -375,7 +385,7 @@
         position="8.5 0 13"
         scale="2 2 2"
         rotation="0 40 0"
-        stego-anim>
+        switch-anim="originalClip:Idle; triggeredClip:Shake">
       </a-entity>
 
       <a-entity
@@ -405,7 +415,7 @@
         class="selectable"
         gltf-model="#diplo-bebe"
         animation-mixer="clip: Idle; loop: repeat; timeScale: 1.5; crossFadeDuration: 0.2"
-        baby-anim
+        switch-anim="originalClip:Idle; triggeredClip:LookAround"
         position="23 0 1"
         scale="2 2 2"
         rotation="0 270 0">
