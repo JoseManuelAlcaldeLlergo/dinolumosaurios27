@@ -321,6 +321,7 @@
           -->
 
         <img id="sanson" src="sanson.jpeg" />
+        <img id="lobster" src="lobster.jpg" />
         <img id="cesped" src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/1601.m10.i311.n029.S.c10.164511620%20Seamless%20green%20grass%20vector%20pattern.jpg?v=1747477475492" />
         <img id="seto" src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/ScatteredLeaves008_1K-JPG_Color.jpg?v=1748788362784" />
       </a-assets>
@@ -336,18 +337,7 @@
         <!-- Palo -->
         <a-cylinder height="1.5" radius="0.05" color="#5C4033" position="0 -1.25 0"> </a-cylinder>
 
-        <!-- Cartel -->
-        <a-box
-          width="2"
-          height="1"
-          depth="0.1"
-          material="src: https://cdn.pixabay.com/photo/2017/08/30/07/52/wood-2695450_1280.jpg; roughness: 1; metalness: 0"
-          position="0 0 0">
-        </a-box>
 
-        <!-- Texto -->
-        <a-text value="Bienvenido al laberinto" color="white" align="center" width="1.8" position="0 0 0.06"> </a-text>
-      </a-entity>
 
       <!-- TRICERATOPS ANIMADO -->
       <a-entity
@@ -402,9 +392,9 @@
         id="key-obj"
         class="selectable"
         gltf-model="#key"
-        position="21 0.3 .6"
+        position="21.55 4 1"
         scale="1 1 1"
-        rotation="0 90 35"
+        rotation="-40 90 35"
         sound="src: url(https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/explosion-42132.mp3?v=1748968413181); positional: true; volume: 1.0"
                 key-activates-parterre>
       </a-entity>
@@ -441,7 +431,7 @@
       <!-- Botón TP -->
 
 <!-- TP -->
-      <a-entity position="-2.5 1 -2.5" rotation="270 0 0">
+      <a-entity position="-2.5 0.1 -1" rotation="270 0 0">
         <!-- Fondo del cartel (madera) -->
         <a-box width="2" height="1" depth="0.1" color="#8B5A2B" material="roughness: 1; metalness: 0"> </a-box>
 
@@ -471,7 +461,7 @@
           id="boton-obj"
           class="selectable"
           gltf-model="#boton"
-          position="0 0 0"
+          position="-1.5 0 -0.6"
           scale="0.3 0.3 0.3"
           rotation="0 270 0"
           switch-anim-elevate
@@ -531,7 +521,13 @@
         <!-- Muros exteriores -->
         <a-box position="17 3 0" width="35" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 7 4 ;"></a-box>
         <a-box static-body position="0 3 18" width="1" height="6" depth="35" material="src:#seto;color: #ccffcc; repeat: 7 4 ;"></a-box>
-        <a-box position="35 3 18" width="1" height="6" depth="35" material="src:#seto;color: #ccffcc; repeat: 8 5"></a-box>
+
+        <!--Muro diplo-->
+        <a-box position="35 3 4.5" width="1" height="6" depth="10" material="src:#seto;color: #ccffcc; repeat: 8 5"></a-box>
+        <a-box position="35 3 24.5" width="1" height="6" depth="22" material="src:#seto;color: #ccffcc; repeat: 8 5"></a-box>
+        <a-box position="35 5.25 11.5" width="1" height="1.5" depth="4" material="src:#seto;color: #ccffcc; repeat: 5"></a-box>
+        <a-box position="34.5 2 11.5" rotation="0 90 0" width="4" height="5" depth="0." material="src:#lobster;"></a-box>
+
 
         <!--Pueerta izquierda-->
         <a-box position="7 3 36" width="15" height="6" depth="1" material="src:#seto;color: #ccffcc; repeat: 7 5;"></a-box>
@@ -807,11 +803,11 @@
             <a-box position="1.01 3 2" rotation="0 270" width="5" height="6" depth="0." material="src:#seto; color: #ccffcc; repeat: 6 5;"></a-box>       </a-entity>
 
           <a-entity id="S" position="10.5 0 28.5">
-¡            <a-box position="-0.5 3 1" width="2" height="6" depth="1" material="src:#seto; color: #ccffcc; repeat: 6 5;"></a-box>
-¡            <a-box position="1 3 0.5" width="1" height="6" depth="2" material="src:#seto; color: #ccffcc; repeat: 6 5;"></a-box>
-¡            <a-box position="0.5 3 -1" width="2" height="6" depth="1" material="src:#seto; color: #ccffcc; repeat: 6 5;"></a-box>
-¡            <a-box position="-1 3 -1.5" width="1" height="6" depth="2" material="src:#seto; color: #ccffcc; repeat: 6 5;"></a-box>
-¡            <a-box position="0 3 -3" width="3" height="6" depth="1" material="src:#seto; color: #ccffcc; repeat: 6 5;"></a-box>
+            <a-box position="-0.5 3 1" width="2" height="6" depth="1" material="src:#seto; color: #ccffcc; repeat: 6 5;"></a-box>
+            <a-box position="1 3 0.5" width="1" height="6" depth="2" material="src:#seto; color: #ccffcc; repeat: 6 5;"></a-box>
+            <a-box position="0.5 3 -1" width="2" height="6" depth="1" material="src:#seto; color: #ccffcc; repeat: 6 5;"></a-box>
+            <a-box position="-1 3 -1.5" width="1" height="6" depth="2" material="src:#seto; color: #ccffcc; repeat: 6 5;"></a-box>
+            <a-box position="0 3 -3" width="3" height="6" depth="1" material="src:#seto; color: #ccffcc; repeat: 6 5;"></a-box>
             <!--Panel-->
             <a-box position="1.51 3 -1" rotation="0 270" width="5" height="6" depth="0." material="src:#seto; color: #ccffcc; repeat: 6 5;"></a-box>
             <a-box position="-1.51 3 -1" rotation="0 90" width="5" height="6" depth="0." material="src:#seto; color: #ccffcc; repeat: 6 5;"></a-box>
