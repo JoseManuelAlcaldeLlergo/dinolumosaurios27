@@ -63,13 +63,15 @@
         schema: {
           originalClip: { type: "string", default: "Idle" },
           triggeredClip: { type: "string", required: true },
-          soundEnabled: { type: "boolean", default: true }
+          soundEnabled: { type: "boolean", default: true },
+          speed: { type: "number", default: 1 },
         },
         init: function () {
           const el = this.el;
           const originalClip = this.data.originalClip;
           const triggeredClip = this.data.triggeredClip;
           const soundEnabled = this.data.soundEnabled;
+          const speed = this.data.speed;
 
           const triggerHandler = () => {
             // Si el sonido está habilitado y hay un componente sound
@@ -81,14 +83,15 @@
             el.setAttribute("animation-mixer", {
               clip: triggeredClip,
               loop: "once",
-              timeScale: 1
+              timeScale: speed
             });
 
             const restoreHandler = () => {
               el.setAttribute("animation-mixer", {
                 clip: originalClip,
                 loop: "repeat",
-                timeScale: 1
+                loop: "repeat",
+                timeScale: numer
               });
               el.removeEventListener("animation-finished", restoreHandler);
             };
@@ -385,7 +388,7 @@
         gltf-model="#triceratops"
         animation-mixer="clip: triceratopsLowPolyv11_LODs; loop: repeat; timeScale: 1"
         switch-anim="originalClip:triceratopsLowPolyv11_LODs; triggeredClip:@IdleBreak"
-        sound="src: url(https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/bombones.mp3?v=1748972396942"
+        sound="src: url(https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/trike.mp3?v=1748888872528); positional: true; volume: 1.0"
         position="-7.5 0 0"
         scale="0.03 0.03 0.03"
         rotation="0 0 0">
@@ -396,7 +399,7 @@
         class="selectable"
         gltf-model="#trex"
         animation-mixer="clip: Idle; loop: repeat; timeScale: 2; crossFadeDuration: 0.2"
-        switch-anim="originalClip:Idle; triggeredClip:Attack"
+        switch-anim="originalClip:Idle; triggeredClip:Attack; speed:2"
         position="-13 0 -14"
         scale="0.8 0.8 0.8"
         rotation="0 -15 0"
