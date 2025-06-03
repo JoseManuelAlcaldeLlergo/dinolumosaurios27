@@ -308,10 +308,18 @@
         <a-asset-item
           id="stego"
           src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/overpowered_stegosaurus.glb?v=1748511516291"
-          response-type="arraybuffer"></a-asset-item>
+          response-type="arraybuffer"></a-asset-item>s
         <a-asset-item
           id="boton"
           src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/low_poly_emergency_button.glb?v=1748878553875"
+          response-type="arraybuffer"></a-asset-item>
+        <a-asset-item
+          id="bombones"
+          src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/chocolate.glb?v=1748971890610"
+          response-type="arraybuffer"></a-asset-item>
+        <a-asset-item
+          id="cookie"
+          src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/fortune_cookie.glb?v=1748972076602"
           response-type="arraybuffer"></a-asset-item>
         <!--
         <a-asset-item
@@ -321,6 +329,7 @@
           -->
 
         <img id="sanson" src="sanson.jpeg" />
+        <img id="luma" src="luma.jpeg" />
         <img id="lobster" src="lobster.jpg" />
         <img id="cesped" src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/1601.m10.i311.n029.S.c10.164511620%20Seamless%20green%20grass%20vector%20pattern.jpg?v=1747477475492" />
         <img id="seto" src="https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/ScatteredLeaves008_1K-JPG_Color.jpg?v=1748788362784" />
@@ -335,12 +344,36 @@
 
       <!-- TRICERATOPS ANIMADO -->
       <a-entity
+        id="bombon-obj"
+        class="selectable"
+        gltf-model="#bombones"
+        animation-mixer
+        switch-anim
+        sound="src: url(https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/bombones.mp3?v=1748972396942); positional: true; volume: 1.0"
+        position="-13 0 8"
+        scale="0.01 0.01 0.01"
+        rotation="0 200 0">
+      </a-entity>
+
+      <a-entity
+        id="cookie-obj"
+        class="selectable"
+        gltf-model="#cookie"
+        animation-mixer
+        switch-anim
+        sound="src: url(https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/cookie.mp3?v=1748972394407); positional: true; volume: 1.0"
+        position="12.5 0 -15"
+        scale="3 3 3"
+        rotation="0 200 0">
+      </a-entity>
+
+      <a-entity
         id="triceratops-obj"
         class="selectable"
         gltf-model="#triceratops"
         animation-mixer="clip: triceratopsLowPolyv11_LODs; loop: repeat; timeScale: 1"
         switch-anim="originalClip:triceratopsLowPolyv11_LODs; triggeredClip:@IdleBreak"
-        sound="src: url(https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/trike.mp3?v=1748888872528); positional: true; volume: 1.0"
+        sound="src: url(https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/bombones.mp3?v=1748972396942"
         position="-7.5 0 0"
         scale="0.03 0.03 0.03"
         rotation="0 0 0">
@@ -363,12 +396,15 @@
         class="selectable"
         gltf-model="#stego"
         animation-mixer="clip: Shake; loop: repeat; timeScale: 1;"
-        position="8.5 0 13"
-        scale="2 2 2"
-        rotation="0 40 0"
+        position="8 0 13.5"
+        scale="1.5 1.5 1.5"
+        rotation="0 259 0"
                 sound="src: url(https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/stego.mp3?v=1748888865595); positional: true; volume: 1.0"
         switch-anim="originalClip:Idle; triggeredClip:Shake">
       </a-entity>
+
+      <a-box position="8 3 15.4" rotation="0 0 0" width="4" height="5" depth="0." material="src:#luma;"></a-box>
+
 
       <a-entity
         id="diplo-bebe-obj"
@@ -999,7 +1035,7 @@
 
 
       <!-- Camera -->
-       <a-entity id="rig" vignette-control movement-controls="speed: 0.15" position="-2 2 35">
+       <a-entity id="rig" vignette-control movement-controls="speed: 0.15" position="-2 10 35">
       <!--<a-entity id="rig" movement-controls="speed: 0.05" position="0 2 0">-->
       <!--<a-entity id="rig" movement-controls="speed: 0.15" position="0 2 0">-->
         <a-entity camera look-controls wasd-controls collision-detection position="0 2 0"> </a-entity>
