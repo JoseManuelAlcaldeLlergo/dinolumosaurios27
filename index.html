@@ -104,94 +104,6 @@
 
 
     <script>
-      AFRAME.registerComponent("triceratops-anim", {
-        init: function () {
-          const el = this.el;
-          const originalClip = "triceratopsLowPolyv11_LODs";
-          const triggeredClip = "@IdleBreak";
-
-          el.addEventListener("trigger-activated", function () {
-
-            // Reproduce el sonido
-            if (el.components.sound) {
-              el.components.sound.playSound();
-            }
-
-            // Reproduce la animacion
-            el.setAttribute("animation-mixer", {
-              clip: triggeredClip,
-              loop: "once",
-              timeScale: 1
-            });
-
-            el.addEventListener("animation-finished", function restore() {
-              el.setAttribute("animation-mixer", {
-                clip: originalClip,
-                loop: "repeat",
-                timeScale: 1
-              });
-              el.removeEventListener("animation-finished", restore);
-            });
-          });
-        }
-      });
-    </script>
-
-    <script>
-      AFRAME.registerComponent("baby-anim", {
-        init: function () {
-          const el = this.el;
-          const originalClip = "Idle";
-          const triggeredClip = "LookAround";
-
-          el.addEventListener("trigger-activated", function () {
-            el.setAttribute("animation-mixer", {
-              clip: triggeredClip,
-              loop: "once",
-              timeScale: 1
-            });
-
-            el.addEventListener("animation-finished", function restore() {
-              el.setAttribute("animation-mixer", {
-                clip: originalClip,
-                loop: "repeat",
-                timeScale: 1
-              });
-              el.removeEventListener("animation-finished", restore);
-            });
-          });
-        }
-      });
-    </script>
-
-    <script>
-      AFRAME.registerComponent("stego-anim", {
-        init: function () {
-          const el = this.el;
-          const originalClip = "Idle";
-          const triggeredClip = "Shake"; // Bite, Peak, Crush, Run, Walk,Tail Whip, Angry Idle
-
-          el.addEventListener("trigger-activated", function () {
-            el.setAttribute("animation-mixer", {
-              clip: triggeredClip,
-              loop: "once",
-              timeScale: 1
-            });
-
-            el.addEventListener("animation-finished", function restore() {
-              el.setAttribute("animation-mixer", {
-                clip: originalClip,
-                loop: "repeat",
-                timeScale: 1
-              });
-              el.removeEventListener("animation-finished", restore);
-            });
-          });
-        }
-      });
-    </script>
-
-    <script>
       AFRAME.registerComponent("elevate-camera", {
         schema: {
           delay: { type: "number", default: 3000 } // Delay en milisegundos (default: 3 segundos)
@@ -259,6 +171,68 @@
     });
 
   </script>
+
+    <script>
+      AFRAME.registerComponent("switch-anim-elevate", {
+        schema: {
+          originalClip: { type: "string", default: "Idle" },
+          triggeredClip: { type: "string", required: true },
+          soundEnabled: { type: "boolean", default: true },
+          delay: { type: "number", default: 3000 } // Delay en milisegundos (default: 3 segundos)
+        },
+        init: function () {
+          const el = this.el;
+          const originalClip = this.data.originalClip;
+          const triggeredClip = this.data.triggeredClip;
+          const soundEnabled = this.data.soundEnabled;
+          const delay = this.data.delay;
+
+          const triggerHandler = () => {
+            // 1. Reproduce el sonido (si está habilitado)
+            if (soundEnabled && el.components.sound) {
+              el.components.sound.playSound();
+            }
+
+            // 2. Cambiar animación
+            el.setAttribute("animation-mixer", {
+              clip: triggeredClip,
+              loop: "once",
+              timeScale: 1
+            });
+
+            // 3. Restaurar animación cuando termine
+            const restoreHandler = () => {
+              el.setAttribute("animation-mixer", {
+                clip: originalClip,
+                loop: "repeat",
+                timeScale: 1
+              });
+              el.removeEventListener("animation-finished", restoreHandler);
+            };
+
+            el.addEventListener("animation-finished", restoreHandler);
+
+            // 4. Elevar cámara después del delay
+            setTimeout(() => {
+              const rig = document.querySelector("#rig");
+              if (rig) {
+                const pos = rig.getAttribute("position");
+                rig.setAttribute("position", {
+                  x: pos.x,
+                  y: pos.y + 15,
+                  z: pos.z
+                });
+                console.log("Cámara elevada +15 después de " + delay + "ms");
+              }
+            }, delay);
+          };
+
+          // 5. Escuchar evento de activación
+          el.addEventListener("trigger-activated", triggerHandler);
+        }
+      });
+    </script>
+
 
 
 
@@ -487,7 +461,7 @@
           position="0 0 0"
           scale="0.3 0.3 0.3"
           rotation="0 270 0"
-          elevate-camera
+          switch-anim-elevate
           switch-anim="originalClip:Static Pose; triggeredClip:Animation">
         </a-entity>
 
