@@ -133,9 +133,20 @@
 
     <script>
       AFRAME.registerComponent("key-activates-parterre", {
+        schema: {
+          soundEnabled: { type: "boolean", default: true } // Habilita o deshabilita el sonido
+        },
         init: function () {
           const keyEl = this.el;
+          const soundEnabled = this.data.soundEnabled;
+
           keyEl.addEventListener("ybutton-activated", function () {
+            // 1. Reproducir sonido si está habilitado y el componente sound existe
+            if (soundEnabled && keyEl.components.sound) {
+              keyEl.components.sound.playSound();
+            }
+
+            // 2. Buscar el parterre y hacerlo invisible
             const parterre = document.querySelector("#parterre");
             if (parterre) {
               parterre.setAttribute("visible", false);
@@ -144,7 +155,8 @@
           });
         }
       });
-  </script>
+    </script>
+
 
   <script>
     AFRAME.registerComponent('white-material', {
@@ -394,7 +406,6 @@
         scale="1 1 1"
         rotation="0 90 35"
         sound="src: url(https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/explosion-42132.mp3?v=1748968413181); positional: true; volume: 1.0"
-                switch-anim
                 key-activates-parterre>
       </a-entity>
 
@@ -464,7 +475,7 @@
           scale="0.3 0.3 0.3"
           rotation="0 270 0"
           switch-anim-elevate
-          sound="src: url(https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/exalar.mp3?v=1748968201758); positional: true; volume: 1.0"
+          sound="src: url(https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/exalar.mp3?v=1748968695080); positional: true; volume: 1.0"
           switch-anim="originalClip:Static Pose; triggeredClip:Animation">
         </a-entity>
 
