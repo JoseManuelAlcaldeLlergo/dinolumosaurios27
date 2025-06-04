@@ -234,7 +234,7 @@
                 rig.setAttribute("position", {
                   x: pos.x,
                   y: pos.y + 15,
-                  z: pos.z
+                  z: pos.z -15
                 });
                 console.log("Cámara elevada +15 después de " + delay + "ms");
               }
@@ -416,7 +416,7 @@
         id="stego-obj"
         class="selectable"
         gltf-model="#stego"
-        animation-mixer="clip: Shake; loop: repeat; timeScale: 1;"
+        animation-mixer="clip: Idle; loop: repeat; timeScale: 1;"
         position="8 0 13.5"
         scale="1.5 1.5 1.5"
         rotation="0 259 0"
@@ -443,7 +443,7 @@
         switch-anim="originalClip:Idle; triggeredClip:LookAround"
         position="19 0 1"
         scale="2.1 2.1 2.1"
-        sound="src: url(https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/diplo.mp3?v=1748888856219); positional: true; volume: 1.0"
+        sound="src: url(https://cdn.glitch.global/68a66446-b576-4bde-84f6-0b321a80c122/diplo.mp3?v=1748888856219); positional: true; volume: 1.5"
         rotation="0 270 0">
       </a-entity>
 
