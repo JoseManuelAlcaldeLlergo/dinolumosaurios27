@@ -122,7 +122,7 @@
                 rig.setAttribute("position", {
                   x: pos.x,
                   y: pos.y + 18,
-                  z: pos.z - 15
+                  z: pos.z + 15
                 });
                 console.log("Cámara elevada +15 después de " + delay + "ms");
               }
@@ -169,6 +169,31 @@
           mesh.traverse((node) => {
             if (node.isMesh) {
               node.material.color.set('white'); // Cambia el color
+              node.material.metalness = 0; // Opcional: para quitar el brillo metálico
+              node.material.roughness = 1; // Opcional: para hacer el blanco mate
+              node.material.map = null; // Elimina textura difusa
+              node.material.needsUpdate = true; // Obligatorio después de cambiar material
+            }
+          });
+        });
+      }
+    });
+
+    // Aplica el componente a tu modelo
+    document.querySelectorAll('.selectable').forEach(el => {
+      el.setAttribute('white-material', '');
+    });
+
+  </script>
+    <script>
+    AFRAME.registerComponent('black-material', {
+      init: function () {
+        this.el.addEventListener('model-loaded', () => {
+          const mesh = this.el.getObject3D('mesh');
+          if (!mesh) { return; }
+          mesh.traverse((node) => {
+            if (node.isMesh) {
+              node.material.color.set('black'); // Cambia el color
               node.material.metalness = 0; // Opcional: para quitar el brillo metálico
               node.material.roughness = 1; // Opcional: para hacer el blanco mate
               node.material.map = null; // Elimina textura difusa
