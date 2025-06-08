@@ -29,6 +29,27 @@
       });
     </script>
 
+    <script>
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'e' || event.key === 'E') { // si pulsa la tecla E
+          const camera = document.querySelector('a-entity[camera]');
+          const raycaster = camera.components.raycaster;
+
+          if (raycaster && raycaster.intersections.length > 0) {
+            const targetEl = raycaster.intersections[0].object.el;
+            if (targetEl) {
+              // Aquí decides qué evento emitir: "trigger-activated", "abutton-activated" o "ybutton-activated"
+              targetEl.emit('trigger-activated');
+              targetEl.emit('abutton-activated');
+              targetEl.emit('bbutton-activated');
+              targetEl.emit('ybutton-activated');
+            }
+          }
+        }
+      });
+    </script>
+
+
 
     <script>
       AFRAME.registerComponent("raycaster-button-a", {
