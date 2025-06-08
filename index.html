@@ -21,10 +21,6 @@
           };
 
           controllerEl.addEventListener("triggerdown", () => emitEvent("trigger-activated"));
-          controllerEl.addEventListener("abuttondown", () => emitEvent("trigger-activated"));
-          controllerEl.addEventListener("bbuttondown", () => emitEvent("trigger-activated"));
-          controllerEl.addEventListener("ybuttondown", () => emitEvent("trigger-activated"));
-          controllerEl.addEventListener("click", () => emitEvent("trigger-activated")); // <-- ADD THIS
         }
       });
     </script>
@@ -48,7 +44,6 @@
         }
       });
     </script>
-
 
 
     <script>
@@ -1118,11 +1113,6 @@
           raycaster-click-emitter>
         </a-entity>
 
-        <!--RATÓN PC-->
-        <a-entity cursor="rayOrigin: mouse" raycaster="objects: .selectable; showline: true"
-          material="color: black; shader: flat"
-          position="0 0 -1" geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02">
-        </a-entity>
 
       </a-entity>
     </a-scene>
