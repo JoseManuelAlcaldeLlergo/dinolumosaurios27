@@ -59,6 +59,30 @@
     </script>
 
     <script>
+      AFRAME.registerComponent("raycaster-click-emitter", {
+        init: function () {
+          const controllerEl = this.el;
+          const emitEvent = function (eventType) {
+            const intersections = controllerEl.components.raycaster.intersections;
+            if (intersections.length > 0) {
+              const targetEl = intersections[0].object.el;
+              if (targetEl) {
+                targetEl.emit(eventType);
+              }
+            }
+          };
+
+          controllerEl.addEventListener("triggerdown", () => emitEvent("trigger-activated"));
+          controllerEl.addEventListener("abuttondown", () => emitEvent("trigger-activated"));
+          controllerEl.addEventListener("bbuttondown", () => emitEvent("trigger-activated"));
+          controllerEl.addEventListener("ybuttondown", () => emitEvent("trigger-activated"));
+          controllerEl.addEventListener("click", () => emitEvent("trigger-activated")); // <-- ADD THIS
+        }
+      });
+    </script>
+
+
+    <script>
       AFRAME.registerComponent("switch-anim", {
         schema: {
           originalClip: { type: "string", default: "Idle" },
@@ -1087,6 +1111,13 @@
           raycaster-button-a
           raycaster-click-emitter>
         </a-entity>
+
+        <!--RATÓN PC-->
+        <a-entity cursor="rayOrigin: mouse" raycaster="objects: .selectable"
+          material="color: black; shader: flat"
+          position="0 0 -1" geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02">
+        </a-entity>
+
       </a-entity>
     </a-scene>
   </body>
