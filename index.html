@@ -6,23 +6,29 @@
     <script src="./aframe-extras.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.5.0/dist/aframe-environment-component.min.js"></script>
 
-
     <script>
       AFRAME.registerComponent("raycaster-click-emitter", {
         init: function () {
           const controllerEl = this.el;
-          controllerEl.addEventListener("triggerdown", function () {
+          const emitEvent = function (eventType) {
             const intersections = controllerEl.components.raycaster.intersections;
             if (intersections.length > 0) {
               const targetEl = intersections[0].object.el;
               if (targetEl) {
-                targetEl.emit("trigger-activated");
+                targetEl.emit(eventType);
               }
             }
-          });
+          };
+
+          controllerEl.addEventListener("triggerdown", () => emitEvent("trigger-activated"));
+          controllerEl.addEventListener("abuttondown", () => emitEvent("trigger-activated"));
+          controllerEl.addEventListener("bbuttondown", () => emitEvent("trigger-activated"));
+          controllerEl.addEventListener("ybuttondown", () => emitEvent("trigger-activated"));
+          controllerEl.addEventListener("click", () => emitEvent("trigger-activated")); // <-- ADD THIS
         }
       });
     </script>
+
 
     <script>
       AFRAME.registerComponent("raycaster-button-a", {
@@ -58,28 +64,6 @@
       });
     </script>
 
-    <script>
-      AFRAME.registerComponent("raycaster-click-emitter", {
-        init: function () {
-          const controllerEl = this.el;
-          const emitEvent = function (eventType) {
-            const intersections = controllerEl.components.raycaster.intersections;
-            if (intersections.length > 0) {
-              const targetEl = intersections[0].object.el;
-              if (targetEl) {
-                targetEl.emit(eventType);
-              }
-            }
-          };
-
-          controllerEl.addEventListener("triggerdown", () => emitEvent("trigger-activated"));
-          controllerEl.addEventListener("abuttondown", () => emitEvent("trigger-activated"));
-          controllerEl.addEventListener("bbuttondown", () => emitEvent("trigger-activated"));
-          controllerEl.addEventListener("ybuttondown", () => emitEvent("trigger-activated"));
-          controllerEl.addEventListener("click", () => emitEvent("trigger-activated")); // <-- ADD THIS
-        }
-      });
-    </script>
 
 
     <script>
